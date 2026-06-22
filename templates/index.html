@@ -541,15 +541,7 @@
       <p class="header__sub">Tell it what you have. Get the optimal pick.</p>
     </header>
 
-    <!-- Settings -->
-    <div class="settings-toggle">
-      <button id="settings-btn" onclick="toggleSettings()">⚙ API Key</button>
-    </div>
-    <div id="settings-panel" class="settings-panel" style="display: none;">
-      <label for="api-key-input">Gemini API Key</label>
-      <input type="password" id="api-key-input" placeholder="AIzaSy…" autocomplete="off" />
-      <div class="hint">Stored locally in your browser only. Never sent to our server.</div>
-    </div>
+    
 
     <!-- Input Panel -->
     <div class="panel panel--delay1">
@@ -730,12 +722,7 @@ async function getAdvice() {
     return;
   }
 
-  const apiKey = document.getElementById('api-key-input').value.trim();
-  if (!apiKey) {
-    showError("Enter your Gemini API key first (click ⚙ API Key above).");
-    document.getElementById('settings-panel').style.display = 'block';
-    return;
-  }
+  
 
   setLoading(true);
   clearError();
@@ -748,14 +735,14 @@ async function getAdvice() {
       body: JSON.stringify({
         current_balls: currentBalls,
         level_up_options: levelUpBalls,
-        api_key: apiKey,
+        
       }),
     });
     const data = await resp.json();
     if (!resp.ok) {
       showError(data.error || 'Something went wrong.');
     } else {
-      renderAdvice(data.advice);
+      renderAdvice(data.structured);
     }
   } catch (e) {
     showError('Failed to get advice. Please try again.');
@@ -775,13 +762,59 @@ function setLoading(state) {
 // ========================================================================
 // Advice Rendering
 // ========================================================================
-function renderAdvice(text) {
-  document.getElementById('advice-container').innerHTML = `
+function renderAdvice(structured) {
+  if (!structured || structured.best_pick === "None") {
+    document.getElementById('advice-container').innerHTML = `
+      <div class="advice-card">
+        <div class="advice-card__label">⚙️ Algorithmic Recommendation</div>
+        <div class="advice-card__body">${escapeHtml(structured?.text_advice || "No advice found.")}</div>
+      </div>
+    `;
+    return;
+  }
+
+  let raw = structured.raw_results[structured.best_pick] || {synergies:[], improvements:[]};
+  
+  let html = `
     <div class="advice-card">
-      <div class="advice-card__label">🧠 AI Recommendation</div>
-      <div class="advice-card__body">${escapeHtml(text)}</div>
-    </div>
+      <div class="advice-card__label">⚙️ Algorithmic Recommendation</div>
+      <div style="font-size: 20px; font-weight: 700; color: var(--gold); margin-bottom: 16px;">
+        🎯 Best Pick: ${structured.best_pick}
+      </div>
   `;
+
+  if (raw.synergies && raw.synergies.length > 0) {
+    html += `<div style="margin-bottom: 12px;">
+      <strong style="color: var(--danger); font-size: 13px; text-transform: uppercase; letter-spacing: .1em;">🔥 Immediate Synergies (Win Fast)</strong>
+      <ul style="margin-top: 6px; padding-left: 20px; color: #c8d6e8; font-size: 14px;">`;
+    raw.synergies.forEach(syn => {
+      html += `<li style="margin-bottom: 4px;">Completes <b>${syn}</b>!</li>`;
+    });
+    html += `</ul></div>`;
+  }
+
+  if (raw.improvements && raw.improvements.length > 0) {
+    html += `<div>
+      <strong style="color: var(--cyan); font-size: 13px; text-transform: uppercase; letter-spacing: .1em;">📈 Evolution Path Finder</strong>
+      <div style="color: var(--text-dim); font-size: 12px; margin-top: 4px;">This ball brings you closer to:</div>
+      <ul style="margin-top: 6px; padding-left: 20px; color: #c8d6e8; font-size: 14px;">`;
+    raw.improvements.slice(0, 5).forEach(imp => {
+      html += `<li style="margin-bottom: 4px;">${escapeHtml(imp)}</li>`;
+    });
+    html += `</ul></div>`;
+  }
+  
+  let runnersUp = Object.keys(structured.raw_results).filter(k => k !== structured.best_pick && structured.raw_results[k].score > 0);
+  runnersUp.sort((a,b) => structured.raw_results[b].score - structured.raw_results[a].score);
+  
+  if (runnersUp.length > 0) {
+    html += `<div style="margin-top: 16px; font-size: 13px; color: var(--text-muted);">
+      🥈 <b>Runner up:</b> ${runnersUp[0]}
+    </div>`;
+  }
+
+  html += `</div>`;
+  document.getElementById('advice-container').innerHTML = html;
 }
 
 // ========================================================================

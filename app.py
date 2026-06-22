@@ -38,70 +38,69 @@ BASE_BALLS = [
 ]
 
 EVOLVED_BALLS = [
-    {"name": "Assassin", "combo": "Iron + Ghost OR Iron + Dark", "desc": "Backstabs deal 30% bonus damage, passes through front of enemies."},
-    {"name": "Berserk", "combo": "Charm + Bleed OR Charm + Burn", "desc": "30% chance to cause berserk for 6 seconds. Berserk enemies damage adjacent foes."},
-    {"name": "Black Hole", "combo": "Dark + Sun", "desc": "Instantly kills first non-boss enemy hit. 7 second cooldown."},
-    {"name": "Blizzard", "combo": "Freeze + Wind OR Freeze + Lightning", "desc": "Freezes all enemies in 2 tile radius for 0.8s, dealing 1-50 damage."},
-    {"name": "Bomb", "combo": "Burn + Iron", "desc": "Explodes on hit, 150-300 damage to nearby enemies. 3 second cooldown."},
-    {"name": "Flash", "combo": "Lightning + Light", "desc": "Damages all enemies on screen for 1-3 and blinds for 2 seconds."},
-    {"name": "Flicker", "combo": "Light + Dark", "desc": "Deals 1-7 damage to every enemy on screen every 1.4 seconds."},
-    {"name": "Freeze Ray", "combo": "Freeze + Laser (H or V)", "desc": "Emits freeze ray on hit, 20-50 damage to all in path, 10% freeze chance."},
-    {"name": "Frozen Flame", "combo": "Burn + Freeze", "desc": "Applies frostburn stacks (max 4). 8-12 damage/stack/sec, enemies take 25% more damage."},
-    {"name": "Glacier", "combo": "Freeze + Earthquake", "desc": "Releases glacial spikes, freezing and dealing 15-30 damage."},
-    {"name": "Hemorrhage", "combo": "Bleed + Iron", "desc": "Applies 3 bleed stacks. At 12+ stacks, consumes all to deal 20% of current health."},
-    {"name": "Holy Laser", "combo": "Laser (H) + Laser (V)", "desc": "Deals 24-36 damage to all enemies in same row AND column."},
-    {"name": "Incubus", "combo": "Charm + Dark", "desc": "4% charm chance for 9 seconds. Charmed enemies curse nearby foes (100-200 damage on 5 hits)."},
-    {"name": "Inferno", "combo": "Burn + Wind", "desc": "Applies 1 burn stack/second to all enemies in 2 tile radius."},
-    {"name": "Laser Beam", "combo": "Light + Laser (H or V)", "desc": "Emits laser on hit, 30-42 damage, blinds for 8 seconds."},
-    {"name": "Leech", "combo": "Brood Mother + Bleed", "desc": "Attaches leeches that add 2 bleed stacks/second (max 24 stacks)."},
-    {"name": "Lightning Rod", "combo": "Lightning + Iron", "desc": "Plants rod; struck by lightning every 3 seconds, 1-30 damage to up to 8 nearby enemies."},
-    {"name": "Lovestruck", "combo": "Charm + Light OR Charm + Lightning", "desc": "Lovestruck enemies have 50% chance to heal you for 5 when they attack."},
-    {"name": "Maggot", "combo": "Brood Mother + Cell", "desc": "Infests enemies; when they die, explode into 1-2 baby balls."},
-    {"name": "Magma", "combo": "Burn + Earthquake", "desc": "Emits lava blobs. Enemies hit take 15-30 damage and gain burn stacks."},
-    {"name": "Mosquito King", "combo": "Vampire + Brood Mother", "desc": "Spawns mosquito per hit, dealing 80-120 damage each. Kill = steal 1 health."},
-    {"name": "Mosquito Swarm", "combo": "Vampire + Egg Sac", "desc": "Explodes into 3-6 mosquitos, each dealing 80-120 damage. Kill = steal 1 health."},
-    {"name": "Noxious", "combo": "Poison + Wind OR Dark + Wind", "desc": "Passes through enemies, applies 3 poison stacks in 2 tile radius."},
-    {"name": "Nuclear Bomb", "combo": "Bomb + Poison", "desc": "300-500 damage explosion + 1 radiation stack to all (max 5). Each stack = 10% more damage taken."},
-    {"name": "Overgrowth", "combo": "Earthquake + Cell", "desc": "At 3 overgrowth stacks, deals 150-200 damage in 3x3 area."},
-    {"name": "Phantom", "combo": "Dark + Ghost", "desc": "Curses enemies on hit. Cursed = 100-200 damage after 5 hits."},
-    {"name": "Radiation Beam", "combo": "Laser (H or V) + Poison OR Cell", "desc": "24-48 damage beam + radiation stack per hit. Each stack = 10% more damage taken."},
-    {"name": "Sacrifice", "combo": "Bleed + Dark", "desc": "Inflicts 4 bleed stacks (max 15) and curses hit enemies."},
-    {"name": "Sandstorm", "combo": "Earthquake + Wind", "desc": "Passes through enemies, dealing 10-20 damage/second and blinding nearby."},
-    {"name": "Satan", "combo": "Incubus + Succubus", "desc": "Adds 1 burn/second to ALL active enemies (max 5 stacks) AND makes them go berserk."},
-    {"name": "Shotgun", "combo": "Iron + Egg Sac", "desc": "Shoots 3-7 iron baby balls after hitting a wall at 200% speed."},
-    {"name": "Soul Sucker", "combo": "Vampire + Ghost", "desc": "30% chance to steal 1 health and reduce enemy attack by 20%."},
-    {"name": "Spider Queen", "combo": "Brood Mother + Egg Sac", "desc": "25% chance to birth an Egg Sac per hit."},
-    {"name": "Storm", "combo": "Lightning + Wind", "desc": "Emits lightning to strike nearby enemies every second, 1-40 damage."},
-    {"name": "Succubus", "combo": "Charm + Vampire", "desc": "4% charm chance for 9 seconds. Heals 1 when hitting charmed enemy."},
-    {"name": "Sun", "combo": "Burn + Light", "desc": "Blinds all enemies in view + 1 burn/second (max 5 stacks). 6-12 damage/stack/sec."},
-    {"name": "Swamp", "combo": "Poison + Earthquake", "desc": "Leaves tar blobs: 15-30 damage, 50% slow, poison stacks (max 8)."},
-    {"name": "Vampire Lord", "combo": "Vampire + Bleed OR Vampire + Dark", "desc": "3 bleed stacks per hit. Heals 1 and consumes all stacks at 10+."},
-    {"name": "Virus", "combo": "Poison + Ghost OR Poison + Cell", "desc": "Disease stacks (max 8), 3-6 damage/stack/sec, 15% spread chance."},
-    {"name": "Voluptuous Egg Sac", "combo": "Egg Sac + Cell", "desc": "Explodes into 2-3 egg sacs on hit. 3 second cooldown."},
-    {"name": "Wraith", "combo": "Freeze + Ghost", "desc": "Freezes any enemy it passes through for 0.8 seconds."},
-    {"name": "Nosferatu", "combo": "Vampire Lord + Spider Queen + Mosquito King", "desc": "Spawns vampire bat per bounce, dealing 132-176 damage. Bat turns into Vampire Lord."},
-    {"name": "Banished Flame", "combo": "Dark + Burn", "desc": "Darkflame stacks (max 6), 1-30 damage/stack/sec. On expiry: 1-100 bonus damage."},
-    {"name": "Banshee", "combo": "Phantom + Wraith", "desc": "Curses all enemies on field when launched. 150-300 damage after 6 hits."},
-    {"name": "Brimstone", "combo": "Burn + Stone OR Poison", "desc": "1 burn + poison stack/second in 2 tile radius (max 4 stacks each)."},
-    {"name": "Catapult", "combo": "Stone + Egg Sac", "desc": "Launches 3-5 stone baby balls every 1.5 seconds."},
-    {"name": "Erosion", "combo": "Time + Wind", "desc": "Passes through enemies. Deals 3% of enemy current health as bonus damage."},
-    {"name": "Fireworks", "combo": "Burn + Egg Sac", "desc": "Explodes into 3-6 fireworks targeting random enemies, 20-30 damage + burn."},
-    {"name": "Heart Swallower", "combo": "Bleed + Ghost", "desc": "40% chance to steal 1 health and reduce enemy attack by 20%."},
-    {"name": "Landslide", "combo": "Stone + Earthquake", "desc": "Creates landslide on hit (destroys self). 20-30 damage/sec in 2 tile radius for 5 seconds."},
-    {"name": "Laser Cutter", "combo": "Steel + Laser (H or V)", "desc": "Constantly emits laser forward, 100-150 damage per second."},
-    {"name": "Reaper", "combo": "Soul Sucker + Heart Swallower", "desc": "10% chance to instantly kill enemies on impact, healing 5 health."},
-    {"name": "Sniper", "combo": "Shotgun + Assassin", "desc": "Pierces enemies, shoots 3-7 sniper baby balls after hitting a wall."},
-    {"name": "Steel", "combo": "Iron + Stone", "desc": "Double damage, 50% slower. Damage grows +10% per hit (max 300%)."},
-    {"name": "Time Bomb", "combo": "Time + Bomb", "desc": "Throws a time bomb every few seconds, exploding for 80-120 damage."},
-    {"name": "Timestop", "combo": "Time + Freeze", "desc": "Freezes everything on field for 5 seconds. Destroys self. 30 second cooldown."},
-    {"name": "Venom", "combo": "Poison + Freeze", "desc": "Venom stacks (max 8), 3-6 damage/stack/sec + slows enemies."},
-    {"name": "Warp", "combo": "Time + Light", "desc": "Warps to random spot after each hit, speeds up by 5% each warp."},
+    {'name': 'Assassin', 'combo': 'Iron + Ghost OR Iron + Dark', 'recipes': [['Iron', 'Ghost'], ['Iron', 'Dark']]},
+    {'name': 'Berserk', 'combo': 'Charm + Bleed OR Charm + Burn', 'recipes': [['Charm', 'Bleed'], ['Charm', 'Burn']]},
+    {'name': 'Black Hole', 'combo': 'Dark + Sun', 'recipes': [['Dark', 'Sun']]},
+    {'name': 'Blizzard', 'combo': 'Freeze + Wind OR Freeze + Lightning', 'recipes': [['Freeze', 'Wind'], ['Freeze', 'Lightning']]},
+    {'name': 'Bomb', 'combo': 'Burn + Iron', 'recipes': [['Burn', 'Iron']]},
+    {'name': 'Flash', 'combo': 'Lightning + Light', 'recipes': [['Lightning', 'Light']]},
+    {'name': 'Flicker', 'combo': 'Light + Dark', 'recipes': [['Light', 'Dark']]},
+    {'name': 'Freeze Ray', 'combo': 'Freeze + Laser (H or V)', 'recipes': [['Freeze', 'Laser (Horizontal)'], ['Freeze', 'Laser (Vertical)']]},
+    {'name': 'Frozen Flame', 'combo': 'Burn + Freeze', 'recipes': [['Burn', 'Freeze']]},
+    {'name': 'Glacier', 'combo': 'Freeze + Earthquake', 'recipes': [['Freeze', 'Earthquake']]},
+    {'name': 'Hemorrhage', 'combo': 'Bleed + Iron', 'recipes': [['Bleed', 'Iron']]},
+    {'name': 'Holy Laser', 'combo': 'Laser (H) + Laser (V)', 'recipes': [['Laser (Horizontal)', 'Laser (Vertical)']]},
+    {'name': 'Incubus', 'combo': 'Charm + Dark', 'recipes': [['Charm', 'Dark']]},
+    {'name': 'Inferno', 'combo': 'Burn + Wind', 'recipes': [['Burn', 'Wind']]},
+    {'name': 'Laser Beam', 'combo': 'Light + Laser (H or V)', 'recipes': [['Light', 'Laser (Horizontal)'], ['Light', 'Laser (Vertical)']]},
+    {'name': 'Leech', 'combo': 'Brood Mother + Bleed', 'recipes': [['Brood Mother', 'Bleed']]},
+    {'name': 'Lightning Rod', 'combo': 'Lightning + Iron', 'recipes': [['Lightning', 'Iron']]},
+    {'name': 'Lovestruck', 'combo': 'Charm + Light OR Charm + Lightning', 'recipes': [['Charm', 'Light'], ['Charm', 'Lightning']]},
+    {'name': 'Maggot', 'combo': 'Brood Mother + Cell', 'recipes': [['Brood Mother', 'Cell']]},
+    {'name': 'Magma', 'combo': 'Burn + Earthquake', 'recipes': [['Burn', 'Earthquake']]},
+    {'name': 'Mosquito King', 'combo': 'Vampire + Brood Mother', 'recipes': [['Vampire', 'Brood Mother']]},
+    {'name': 'Mosquito Swarm', 'combo': 'Vampire + Egg Sac', 'recipes': [['Vampire', 'Egg Sac']]},
+    {'name': 'Noxious', 'combo': 'Poison + Wind OR Dark + Wind', 'recipes': [['Poison', 'Wind'], ['Dark', 'Wind']]},
+    {'name': 'Nuclear Bomb', 'combo': 'Bomb + Poison', 'recipes': [['Bomb', 'Poison']]},
+    {'name': 'Overgrowth', 'combo': 'Earthquake + Cell', 'recipes': [['Earthquake', 'Cell']]},
+    {'name': 'Phantom', 'combo': 'Dark + Ghost', 'recipes': [['Dark', 'Ghost']]},
+    {'name': 'Radiation Beam', 'combo': 'Laser (H or V) + Poison OR Cell', 'recipes': [['Laser (Horizontal)', 'Poison'], ['Laser (Vertical)', 'Poison'], ['Laser (Horizontal)', 'Cell'], ['Laser (Vertical)', 'Cell']]},
+    {'name': 'Sacrifice', 'combo': 'Bleed + Dark', 'recipes': [['Bleed', 'Dark']]},
+    {'name': 'Sandstorm', 'combo': 'Earthquake + Wind', 'recipes': [['Earthquake', 'Wind']]},
+    {'name': 'Satan', 'combo': 'Incubus + Succubus', 'recipes': [['Incubus', 'Succubus']]},
+    {'name': 'Shotgun', 'combo': 'Iron + Egg Sac', 'recipes': [['Iron', 'Egg Sac']]},
+    {'name': 'Soul Sucker', 'combo': 'Vampire + Ghost', 'recipes': [['Vampire', 'Ghost']]},
+    {'name': 'Spider Queen', 'combo': 'Brood Mother + Egg Sac', 'recipes': [['Brood Mother', 'Egg Sac']]},
+    {'name': 'Storm', 'combo': 'Lightning + Wind', 'recipes': [['Lightning', 'Wind']]},
+    {'name': 'Succubus', 'combo': 'Charm + Vampire', 'recipes': [['Charm', 'Vampire']]},
+    {'name': 'Sun', 'combo': 'Burn + Light', 'recipes': [['Burn', 'Light']]},
+    {'name': 'Swamp', 'combo': 'Poison + Earthquake', 'recipes': [['Poison', 'Earthquake']]},
+    {'name': 'Vampire Lord', 'combo': 'Vampire + Bleed OR Vampire + Dark', 'recipes': [['Vampire', 'Bleed'], ['Vampire', 'Dark']]},
+    {'name': 'Virus', 'combo': 'Poison + Ghost OR Poison + Cell', 'recipes': [['Poison', 'Ghost'], ['Poison', 'Cell']]},
+    {'name': 'Voluptuous Egg Sac', 'combo': 'Egg Sac + Cell', 'recipes': [['Egg Sac', 'Cell']]},
+    {'name': 'Wraith', 'combo': 'Freeze + Ghost', 'recipes': [['Freeze', 'Ghost']]},
+    {'name': 'Nosferatu', 'combo': 'Vampire Lord + Spider Queen + Mosquito King', 'recipes': [['Vampire Lord', 'Spider Queen', 'Mosquito King']]},
+    {'name': 'Banished Flame', 'combo': 'Dark + Burn', 'recipes': [['Dark', 'Burn']]},
+    {'name': 'Banshee', 'combo': 'Phantom + Wraith', 'recipes': [['Phantom', 'Wraith']]},
+    {'name': 'Brimstone', 'combo': 'Burn + Stone OR Poison', 'recipes': [['Burn', 'Stone'], ['Burn', 'Poison']]},
+    {'name': 'Catapult', 'combo': 'Stone + Egg Sac', 'recipes': [['Stone', 'Egg Sac']]},
+    {'name': 'Erosion', 'combo': 'Time + Wind', 'recipes': [['Time', 'Wind']]},
+    {'name': 'Fireworks', 'combo': 'Burn + Egg Sac', 'recipes': [['Burn', 'Egg Sac']]},
+    {'name': 'Heart Swallower', 'combo': 'Bleed + Ghost', 'recipes': [['Bleed', 'Ghost']]},
+    {'name': 'Landslide', 'combo': 'Stone + Earthquake', 'recipes': [['Stone', 'Earthquake']]},
+    {'name': 'Laser Cutter', 'combo': 'Steel + Laser (H or V)', 'recipes': [['Steel', 'Laser (Horizontal)'], ['Steel', 'Laser (Vertical)']]},
+    {'name': 'Reaper', 'combo': 'Soul Sucker + Heart Swallower', 'recipes': [['Soul Sucker', 'Heart Swallower']]},
+    {'name': 'Sniper', 'combo': 'Shotgun + Assassin', 'recipes': [['Shotgun', 'Assassin']]},
+    {'name': 'Steel', 'combo': 'Iron + Stone', 'recipes': [['Iron', 'Stone']]},
+    {'name': 'Time Bomb', 'combo': 'Time + Bomb', 'recipes': [['Time', 'Bomb']]},
+    {'name': 'Timestop', 'combo': 'Time + Freeze', 'recipes': [['Time', 'Freeze']]},
+    {'name': 'Venom', 'combo': 'Poison + Freeze', 'recipes': [['Poison', 'Freeze']]},
+    {'name': 'Warp', 'combo': 'Time + Light', 'recipes': [['Time', 'Light']]},
 ]
 
 TOP_EVOLUTIONS = [
     "Frozen Flame", "Nuclear Bomb", "Hemorrhage", "Vampire Lord", "Holy Laser",
-    "Satan", "Nosferatu", "Black Hole", "Radiation Beam", "Sun",
-    "Steel", "Timestop", "Laser Cutter", "Banished Flame", "Reaper",
+    "Satan", "Nosferatu", "Black Hole", "Radiation Beam", "Sun", "Timestop", "Laser Cutter", "Banished Flame", "Reaper",
 ]
 
 TOP_FUSIONS = [
@@ -141,37 +140,135 @@ def ball_data_text(names: list[str]) -> str:
     return "\n".join(lines)
 
 
-def build_prompt(current_balls: list[str], level_up_options: list[str]) -> str:
-    evolved_context = "\n".join(
-        f"{e['name']} ({e['combo']}): {e['desc']}" for e in EVOLVED_BALLS
-    )
-    fusion_context = "\n".join(
-        f"{f['balls'][0]} × {f['balls'][1]}: {f['tip']}" for f in TOP_FUSIONS
-    )
-    return f"""You are an expert BALL x PIT roguelite advisor. Analyze this player's situation and give strategic advice.
 
-CURRENT BALLS:
-{ball_data_text(current_balls) if current_balls else "None yet"}
+from collections import Counter
 
-LEVEL-UP OPTIONS BEING OFFERED:
-{ball_data_text(level_up_options) if level_up_options else "Not specified"}
+def get_recipes(ball_name):
+    for eb in EVOLVED_BALLS:
+        if eb['name'].lower() == ball_name.lower():
+            return eb.get('recipes', [])
+    return []
 
-ALL POSSIBLE EVOLUTIONS (for reference):
-{evolved_context}
+def min_distance(target, current_counts):
+    # current_counts is a Counter
+    if current_counts.get(target, 0) > 0:
+        return 0, Counter({target: 1})
+    
+    recipes = get_recipes(target)
+    if not recipes:
+        return 1, Counter()
+        
+    best_dist = float('inf')
+    best_used = Counter()
+    
+    for recipe in recipes:
+        dist = 0
+        used = Counter()
+        local_counts = current_counts.copy()
+        
+        for comp in recipe:
+            comp_dist, comp_used = min_distance(comp, local_counts)
+            dist += comp_dist
+            used += comp_used
+            local_counts -= comp_used
+            
+        if dist < best_dist:
+            best_dist = dist
+            best_used = used
+            
+    return best_dist, best_used
 
-TOP-TIER EVOLUTIONS TO AIM FOR: {", ".join(TOP_EVOLUTIONS)}
+def fusion_distance(fusion_recipe, current_counts):
+    dist = 0
+    local_counts = current_counts.copy()
+    for comp in fusion_recipe:
+        c_dist, c_used = min_distance(comp, local_counts)
+        dist += c_dist
+        local_counts -= c_used
+    return dist
 
-TOP-TIER FUSIONS (combining 2 balls together — can be base+base, base+evolved, or evolved+evolved):
-{fusion_context}
-
-Give clear, specific advice:
-1. Which level-up option to pick (and why, based on synergies with current balls)
-2. What evolutions are NOW possible or 1 ball away
-3. What fusions (2-ball combos) are possible or close with current balls
-4. The ideal build path to aim for given the current state
-5. Any balls to prioritize getting next
-
-Be concise, tactical, and specific. Format with clear sections. Mention specific ball names and combos."""
+def evaluate_options(current_balls, level_up_options):
+    current_counts = Counter(current_balls)
+    
+    base_evo_dists = {evo: min_distance(evo, current_counts)[0] for evo in TOP_EVOLUTIONS}
+    base_fusion_dists = {idx: fusion_distance(fusion["balls"], current_counts) for idx, fusion in enumerate(TOP_FUSIONS)}
+    
+    best_score = -1
+    best_option = None
+    results = {}
+    
+    for option in level_up_options:
+        new_counts = current_counts.copy()
+        new_counts[option] += 1
+        
+        score = 0
+        synergies = []
+        improvements = []
+        
+        for evo in TOP_EVOLUTIONS:
+            new_dist = min_distance(evo, new_counts)[0]
+            old_dist = base_evo_dists[evo]
+            if new_dist < old_dist:
+                if new_dist == 0:
+                    synergies.append(f"Evolution: {evo}")
+                    score += 1000
+                else:
+                    improvements.append((new_dist, f"Closer to {evo} ({new_dist} away)"))
+                    score += 10 / new_dist
+                    
+        for idx, fusion in enumerate(TOP_FUSIONS):
+            new_dist = fusion_distance(fusion["balls"], new_counts)
+            old_dist = base_fusion_dists[idx]
+            if new_dist < old_dist:
+                fusion_name = f"{fusion['balls'][0]} × {fusion['balls'][1]}"
+                if new_dist == 0:
+                    synergies.append(f"Fusion: {fusion_name}")
+                    score += 2000
+                else:
+                    improvements.append((new_dist, f"Closer to {fusion_name} ({new_dist} away)"))
+                    score += 20 / new_dist
+                    
+        # Sort improvements by distance
+        improvements.sort(key=lambda x: x[0])
+        imp_strings = [x[1] for x in improvements]
+        
+        results[option] = {
+            "score": score,
+            "synergies": synergies,
+            "improvements": imp_strings
+        }
+        
+        if score > best_score:
+            best_score = score
+            best_option = option
+            
+    if best_score <= 0:
+        return {"best_pick": "None", "text_advice": "No significant synergies found. Pick based on base stats.", "raw_results": results}
+        
+    res = results[best_option]
+    advice = f"🎯 Best Pick: **{best_option}**\n\n"
+    
+    if res["synergies"]:
+        advice += "🔥 **IMMEDIATE SYNERGIES (Win Fast)**\n"
+        for syn in res["synergies"]:
+            advice += f"• Completes {syn}!\n"
+        advice += "\n"
+        
+    if res["improvements"]:
+        advice += "📈 **EVOLUTION PATH FINDER**\nThis ball brings you closer to:\n"
+        for imp in res["improvements"][:5]:
+            advice += f"• {imp}\n"
+            
+    runners_up = [(opt, data) for opt, data in results.items() if opt != best_option and data["score"] > 0]
+    runners_up.sort(key=lambda x: x[1]["score"], reverse=True)
+    if runners_up:
+        advice += f"\n🥈 **Runner up:** {runners_up[0][0]}"
+        
+    return {
+        "best_pick": best_option,
+        "text_advice": advice,
+        "raw_results": results
+    }
 
 # ---------------------------------------------------------------------------
 # Routes
@@ -192,6 +289,7 @@ def api_balls():
     })
 
 
+
 @app.route("/api/advice", methods=["POST"])
 def api_advice():
     data = request.get_json(force=True)
@@ -201,45 +299,14 @@ def api_advice():
     if not current_balls and not level_up_options:
         return jsonify({"error": "Add at least your current balls or level-up options."}), 400
 
-    api_key = data.get("api_key", "").strip()
-    if not api_key:
-        api_key = os.environ.get("GEMINI_API_KEY", "")
-    if not api_key:
-        return jsonify({"error": "No API key provided. Enter your Gemini API key in the settings panel."}), 400
-
-    prompt = build_prompt(current_balls, level_up_options)
-
     try:
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key={api_key}"
-        resp = http_requests.post(
-            url,
-            headers={
-                "Content-Type": "application/json",
-            },
-            json={
-                "contents": [{"parts": [{"text": prompt}]}],
-                "generationConfig": {"maxOutputTokens": 1000},
-            },
-            timeout=60,
-        )
-        resp.raise_for_status()
-        result = resp.json()
-        
-        try:
-            text = result["candidates"][0]["content"]["parts"][0]["text"]
-        except (KeyError, IndexError):
-            text = "No advice returned."
-            
-        return jsonify({"advice": text})
-    except http_requests.exceptions.HTTPError as e:
-        error_body = ""
-        try:
-            error_body = e.response.json().get("error", {}).get("message", str(e))
-        except Exception:
-            error_body = str(e)
-        return jsonify({"error": f"API error: {error_body}"}), 502
+        res = evaluate_options(current_balls, level_up_options)
+        return jsonify({
+            "advice": res["text_advice"],
+            "structured": res
+        })
     except Exception as e:
-        return jsonify({"error": f"Failed to get advice: {str(e)}"}), 500
+        return jsonify({"error": f"Failed to calculate advice: {str(e)}"}), 500
 
 
 # ---------------------------------------------------------------------------
