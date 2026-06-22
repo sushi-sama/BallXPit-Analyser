@@ -32,3 +32,8 @@ python app.py
 ```
 
 Then open [http://localhost:5000](http://localhost:5000) in your browser.
+
+## To-Do
+1. Handle **Banish** and **Reroll** mechanics.
+2. Handle **ball limit** (a player can have a maximum of 4 balls at any given time). The only way to bring this down is to evolve (if there's a valid option) or fuse (if there are at least 2 balls that haven't been fused before).
+3. Add **triple evolutions** (combinations where you can evolve a ball, and then evolve it again with another).
