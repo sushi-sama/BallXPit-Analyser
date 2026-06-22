@@ -203,33 +203,34 @@ def api_advice():
 
     api_key = data.get("api_key", "").strip()
     if not api_key:
-        api_key = os.environ.get("ANTHROPIC_API_KEY", "")
+        api_key = os.environ.get("GEMINI_API_KEY", "")
     if not api_key:
-        return jsonify({"error": "No API key provided. Enter your Anthropic API key in the settings panel."}), 400
+        return jsonify({"error": "No API key provided. Enter your Gemini API key in the settings panel."}), 400
 
     prompt = build_prompt(current_balls, level_up_options)
 
     try:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key={api_key}"
         resp = http_requests.post(
-            "https://api.anthropic.com/v1/messages",
+            url,
             headers={
                 "Content-Type": "application/json",
-                "x-api-key": api_key,
-                "anthropic-version": "2023-06-01",
             },
             json={
-                "model": "claude-sonnet-4-6",
-                "max_tokens": 1000,
-                "messages": [{"role": "user", "content": prompt}],
+                "contents": [{"parts": [{"text": prompt}]}],
+                "generationConfig": {"maxOutputTokens": 1000},
             },
             timeout=60,
         )
         resp.raise_for_status()
         result = resp.json()
-        text = "\n".join(
-            c["text"] for c in result.get("content", []) if c.get("type") == "text"
-        )
-        return jsonify({"advice": text or "No advice returned."})
+        
+        try:
+            text = result["candidates"][0]["content"]["parts"][0]["text"]
+        except (KeyError, IndexError):
+            text = "No advice returned."
+            
+        return jsonify({"advice": text})
     except http_requests.exceptions.HTTPError as e:
         error_body = ""
         try:

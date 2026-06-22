@@ -546,8 +546,8 @@
       <button id="settings-btn" onclick="toggleSettings()">⚙ API Key</button>
     </div>
     <div id="settings-panel" class="settings-panel" style="display: none;">
-      <label for="api-key-input">Anthropic API Key</label>
-      <input type="password" id="api-key-input" placeholder="sk-ant-…" autocomplete="off" />
+      <label for="api-key-input">Gemini API Key</label>
+      <input type="password" id="api-key-input" placeholder="AIzaSy…" autocomplete="off" />
       <div class="hint">Stored locally in your browser only. Never sent to our server.</div>
     </div>
 
@@ -732,7 +732,7 @@ async function getAdvice() {
 
   const apiKey = document.getElementById('api-key-input').value.trim();
   if (!apiKey) {
-    showError("Enter your Anthropic API key first (click ⚙ API Key above).");
+    showError("Enter your Gemini API key first (click ⚙ API Key above).");
     document.getElementById('settings-panel').style.display = 'block';
     return;
   }
