@@ -649,7 +649,7 @@
           <button class="btn-clear" style="margin-left: auto;" onclick="clearBalls('levelup')">Clear All</button>
         </div>
         <div class="input-row">
-          <input type="text" id="levelup-input" list="ball-datalist"
+          <input type="text" id="levelup-input" list="base-ball-datalist"
                  placeholder="What balls are being offered?"
                  onkeydown="if(event.key==='Enter'){addBall('levelup')}" />
           <button class="btn-add" onclick="addBall('levelup')">+ Add</button>
@@ -701,8 +701,10 @@
       </div>
     </div>
 
-    <!-- Datalist for autocomplete -->
+    <!-- Datalist for autocomplete (all balls - used by current balls input) -->
     <datalist id="ball-datalist"></datalist>
+    <!-- Datalist for level-up options (base balls only) -->
+    <datalist id="base-ball-datalist"></datalist>
 
   </div>
 </div>
@@ -733,12 +735,20 @@ let loading      = false;
     topFusions   = data.top_fusions || [];
     allBalls     = [...baseBalls, ...evolvedBalls];
 
-    // Populate datalist
+    // Populate datalist for all balls (current balls input)
     const dl = document.getElementById('ball-datalist');
     allBalls.forEach(b => {
       const opt = document.createElement('option');
       opt.value = b.name;
       dl.appendChild(opt);
+    });
+
+    // Populate datalist for base balls only (level-up options input)
+    const baseDl = document.getElementById('base-ball-datalist');
+    baseBalls.forEach(b => {
+      const opt = document.createElement('option');
+      opt.value = b.name;
+      baseDl.appendChild(opt);
     });
 
     // Data loaded successfully
@@ -765,9 +775,15 @@ function addBall(section) {
   const trimmed = inputEl.value.trim();
   if (!trimmed) return;
 
-  const match = allBalls.find(b => b.name.toLowerCase() === trimmed.toLowerCase());
+  // Level-up options can only be base balls (not evolved balls)
+  const searchPool = section === 'levelup' ? baseBalls : allBalls;
+  const match = searchPool.find(b => b.name.toLowerCase() === trimmed.toLowerCase());
   if (!match) {
-    showError(`"${trimmed}" not found. Check spelling.`);
+    if (section === 'levelup') {
+      showError(`"${trimmed}" not found in base balls. Level-up offers only include base balls.`);
+    } else {
+      showError(`"${trimmed}" not found. Check spelling.`);
+    }
     return;
   }
   if (list.includes(match.name)) {
