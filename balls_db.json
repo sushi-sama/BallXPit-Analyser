@@ -1,0 +1,440 @@
+{
+    "base": [
+        {
+            "name": "Bleed",
+            "desc": "Inflicts 2 stacks of bleed. Bleeding enemies receive 1 damage per stack when hit by a ball (max 8 stacks)."
+        },
+        {
+            "name": "Brood Mother",
+            "desc": "Has a 25% chance of birthing a baby ball each time it hits an enemy."
+        },
+        {
+            "name": "Burn",
+            "desc": "Add 1 stack of burn on hit for 3 seconds (max 3 stacks). Burnt units are dealt 4-8 damage per stack per second."
+        },
+        {
+            "name": "Cell",
+            "desc": "Splits into a clone on hit 2 times."
+        },
+        {
+            "name": "Charm",
+            "desc": "Each hit has a 4% chance of charming the enemy for 5 seconds. Charmed units walk up the board and attack enemies."
+        },
+        {
+            "name": "Dark",
+            "desc": "Deals 3.0x damage but destroys itself after hitting an enemy. Has a 3 second cooldown before it can be shot again."
+        },
+        {
+            "name": "Earthquake",
+            "desc": "Deals 5-13 damage to nearby units in a 3x3 tile square."
+        },
+        {
+            "name": "Egg Sac",
+            "desc": "Explodes into 2-4 baby balls on hitting an enemy. Has a 3 second cooldown before it can be shot again."
+        },
+        {
+            "name": "Freeze",
+            "desc": "Has a 4% chance to freeze enemies for 5.0 seconds. Frozen enemies receive 25% more damage."
+        },
+        {
+            "name": "Ghost",
+            "desc": "Passes through enemies."
+        },
+        {
+            "name": "Iron",
+            "desc": "Deals double damage but moves 40% slower."
+        },
+        {
+            "name": "Laser (Horizontal)",
+            "desc": "Deals 9-18 damage to all enemies in the same row."
+        },
+        {
+            "name": "Laser (Vertical)",
+            "desc": "Deals 9-18 damage to all enemies in the same column."
+        },
+        {
+            "name": "Light",
+            "desc": "Blinds enemies on hit for 3 seconds. Blinded units have a hard time detecting you and have a 50% chance of missing when they attack."
+        },
+        {
+            "name": "Lightning",
+            "desc": "Deals 1-20 damage to up to 3 nearby enemies."
+        },
+        {
+            "name": "Stone",
+            "desc": "Initially deals 300% damage. Damage erodes by 40% each time hitting an enemy (minimum 50%)."
+        },
+        {
+            "name": "Poison",
+            "desc": "Applies 1 stack of poison on hit (max 5 stacks). Poison lasts for 6 seconds and each stack deals 1-4 damage per second."
+        },
+        {
+            "name": "Time",
+            "desc": "Explodes into a time snare upon hitting an enemy, which stays on the field for 20 seconds and freezes enemies inside it."
+        },
+        {
+            "name": "Vampire",
+            "desc": "Each hit has a 4.5% chance of healing 1 health."
+        },
+        {
+            "name": "Wind",
+            "desc": "Passes through enemies and slows them down by 30% for 5 seconds, but deals 25% less damage."
+        }
+    ],
+    "evolved": [
+        {
+            "name": "Assassin",
+            "desc": "Passes through the front of enemies, but not the back. Backstabs deal 30% bonus damage.",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Banished Flame",
+            "desc": "Add 1 stack of darkflame on hit for 2 seconds (max 6 stacks). Darkflame deals 1-30 damage per stack per second. When the darkflame goes out, it deals 1-100 to the enemy.",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Banshee",
+            "desc": "Curses all enemies while on the field when launched. Cursed enemies are dealt 150-300 after being hit 6 times.",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Berserk",
+            "desc": "Each hit has a 30% chance of causing enemies to go berserk for 6 seconds. Berserk enemies deal 15-24 damage to adjacent enemies every second",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Black Hole",
+            "desc": "Instantly kills the first non-boss enemy that it hits, but destroys itself afterwards. Has a 7 second cooldown before it can be shot again",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Blizzard",
+            "desc": "Freezes all enemies within a 2 tile radius for 0.8 seconds, dealing 1-50 damage",
+            "combo": "Base, AOE",
+            "recipes": []
+        },
+        {
+            "name": "Bomb",
+            "desc": "Explodes when hitting an enemy, dealing 150-300 damage to nearby enemies. Has a 3 second cooldown before it can be shot again",
+            "combo": "AOE",
+            "recipes": []
+        },
+        {
+            "name": "Brimstone",
+            "desc": "Applies 1 stack of burn and poison every second to all enemies within a 2 tile radius (max 4 stacks). Burn deals 1-4 damage per stack per second and poison deals 2-3 damage per stack per second.",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Catapult",
+            "desc": "Launches 3-5 stone baby balls every 1.5 seconds, which are destroyed after hitting anything.",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Erosion",
+            "desc": "Passes through enemies. Deals 3% of enemy's current health as bonus damage on hit.",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Fireworks",
+            "desc": "Explodes into 3-6 fireworks. Fireworks target random enemies, dealing 20-30 damage and applying 1 stack of burn. Burnt units are dealt 7-11 damage per stack per second.",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Flash",
+            "desc": "Damage all enemies on screen for 1-3 damage after hitting an enemy and blind them for 2 seconds",
+            "combo": "Base, AOE",
+            "recipes": []
+        },
+        {
+            "name": "Flicker",
+            "desc": "Deals 1-7 damage to every enemy on screen every 1.4 seconds",
+            "combo": "Base, AOE",
+            "recipes": []
+        },
+        {
+            "name": "Freeze Ray",
+            "desc": "Emits a freeze ray when hitting an enemy, dealing 20-50 to all enemies in its path, with a 10% chance of freezing them for 10.0 seconds",
+            "combo": "Base, AOE",
+            "recipes": []
+        },
+        {
+            "name": "Frozen Flame",
+            "desc": "Add 1 stack of frostburn on hit for 20 seconds (max 4 stacks). Frostburnt units are dealt 8-12 damage per stack per second and receive 25% more damage from other sources",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Glacier",
+            "desc": "Releases glacial spikes over time that deal 15-30 to enemies that touch them and freeze them for 2.0 seconds. This ball and its glacial spikes also deal 6-12 damage to nearby units",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Heart Swallower",
+            "desc": "Saps enemies on hit, with a 40% chance of stealing 1 health and reducing their attack damage by 20%. Lifesteal chance only applies once per enemy.",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Hemorrhage",
+            "desc": "Inflicts 3 stacks of bleed. When hitting an enemy with 12 stacks of bleed or more, consumes all stacks of bleed to deal 20% of their current health",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Holy Laser",
+            "desc": "Deals 24-36 damage to all enemies in the same row and column",
+            "combo": "AOE",
+            "recipes": []
+        },
+        {
+            "name": "Incubus",
+            "desc": "Each hit has a 4% chance of charming the enemy for 9 seconds. Charmed enemies curse nearby enemies. Cursed enemies are dealt 100-200 after being hit 5 times",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Inferno",
+            "desc": "Applies 1 stack of burn every second to all enemies within a 2 tile radius. Burn lasts for 6 seconds, dealing 3-7 damage per stack per seconds",
+            "combo": "AOE",
+            "recipes": []
+        },
+        {
+            "name": "Landslide",
+            "desc": "Creates a landslide and destroys self upon hitting an enemy. The landslide lasts for 5 seconds and deals 20-30 damage per second to enemies within a 2 tile radius",
+            "combo": "Base, AOE",
+            "recipes": []
+        },
+        {
+            "name": "Laser Beam",
+            "desc": "Emit a laser beam on hit that deals 30-42 damage and blinds enemies for 8 seconds",
+            "combo": "Base, AOE",
+            "recipes": []
+        },
+        {
+            "name": "Laser Cutter",
+            "desc": "Constantly emits a laser in front of it, which deals 100-150 damage per second.",
+            "combo": "Base, AOE",
+            "recipes": []
+        },
+        {
+            "name": "Leech",
+            "desc": "Attaches up to 1 leech onto enemies it hits, which add 2 stacks of bleed per seconds (max 24 stacks)",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Lightning Rod",
+            "desc": "Plants a lightning rod into enemies it hits. These enemies are struck by lightning every 3.0 seconds, dealing 1-30 damage to up to 8 nearby enemies",
+            "combo": "Base, AOE",
+            "recipes": []
+        },
+        {
+            "name": "Lovestruck",
+            "desc": "Inflicts lovestruck on hit enemies for 20 seconds. Lovestruck units have a 50% chance of healing you for 5 health when they attack",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Maggot",
+            "desc": "Infest enemies on hit with maggots. When they dies, they explode into 1-2 baby balls",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Magma",
+            "desc": "Emits lava blobs over time. Enemies who walk into lava blobs are dealt 15-30 damage and gain 1 stack of burn (max 3 stacks). Burn lasts for 3 seconds, dealing 3-8 damage per stack per second. This ball and its lava blobs also deal 6-12 damage to nearby units",
+            "combo": "Base, AOE",
+            "recipes": []
+        },
+        {
+            "name": "Mosquito King",
+            "desc": "Spawns a mosquito each time it hits an enemy. Mosquitos attack a random enemy, dealing 80-120 damage each. If a mosquito kills an enemy, they steal 1 health",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Mosquito Swarm",
+            "desc": "Explodes into 3-6 mosquitos. Mosquitos attack random enemies, dealing 80-120 damage each. If a mosquito kills an enemy, they steal 1 health",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Nosferatu",
+            "desc": "Spawns a vampire bat each bounce. Vampire bats fly towards a random enemy, dealing 132-176 damage on hit, turning into a Vampire Lord",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Noxious",
+            "desc": "Passes through enemies and applies 3 stacks of poison to nearby enemies within a 2 tile radius. Poison lasts for 4 seconds and each stack deals 1-3 damage per second",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Nuclear Bomb",
+            "desc": "Explodes when hitting an enemy, dealing 300-500 damage to nearby enemies and applying 1 stack of radiation to everyone present indefinitely (max 5 stacks). Each stack of radiation increases damage received by 10%. Has a 3 second cooldown",
+            "combo": "AOE",
+            "recipes": []
+        },
+        {
+            "name": "Overgrowth",
+            "desc": "Applies 1 stack of overgrowth. Upon reaching 3, consume all stacks and deal 150-200 damage to all enemies in a 3x3 tile square",
+            "combo": "Base, AOE",
+            "recipes": []
+        },
+        {
+            "name": "Phantom",
+            "desc": "Curse enemies on hit. Cursed enemies are dealt 100-200 damage after being hit 5 times",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Radiation Beam",
+            "desc": "Emit a radiation beam on hit that deals 24-48 damage and applies 1 stack of radiation (max 5 stacks). Radiation lasts for 15 seconds and cause enemies to receive 10% more damage from all sources per stack",
+            "combo": "Base, AOE",
+            "recipes": []
+        },
+        {
+            "name": "Reaper",
+            "desc": "Has a 10% chance to kill enemies on impact, healing you for 5 health.",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Sacrifice",
+            "desc": "Inflicts 4 stacks of bleed (max 15 stacks) and applies curse to hit enemies. Cursed enemies are dealt 50-100 after being hit 5 times",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Sandstorm",
+            "desc": "Goes through enemies and is surrounded by a raging storm dealing 10-20 damage per second and blinding nearby enemies for 3 seconds",
+            "combo": "Base, AOE",
+            "recipes": []
+        },
+        {
+            "name": "Satan",
+            "desc": "While active, add 1 stack of burn to all active enemies per second (max 5 stacks), dealing 10-20 damage per stack per second and make them go berserk, dealing 15-24 damage to adjacent enemies every second",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Shotgun",
+            "desc": "Shoots 3-7 iron baby balls after hitting a wall. Iron baby balls move at 200% speed but are destroyed upon hitting anything",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Sniper",
+            "desc": "Pierces enemies and shoots 3-7 sniper baby balls after hitting a wall. Sniper baby balls pierce enemies but are destroyed upon hitting a wall.",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Soul Sucker",
+            "desc": "Passes through enemies and saps them, with a 30% chance of stealing 1 health and reducing their attack damage by 20%. Lifesteal chance only applies once per enemy",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Spider Queen",
+            "desc": "Has a 25% chance of birthing an Egg Sac each time it hits an enemy",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Steel",
+            "desc": "Initially deals double damage but moves 50% slower. Damage increases by 10% each time it hits an enemy (max 300%).",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Storm",
+            "desc": "Emits lightning to strike nearby enemies every second, dealing 1-40 damage",
+            "combo": "AOE",
+            "recipes": []
+        },
+        {
+            "name": "Succubus",
+            "desc": "Each hit has a 4% chance of charming the enemy for 9 seconds. Heals 1 when hitting a charmed enemy",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Sun",
+            "desc": "Blind all enemies in view and add 1 stack of burn every second (max 5 stacks). Burn lasts for 6 seconds and deals 6-12 damage per stack per second",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Swamp",
+            "desc": "Leaves behind tar blobs over time. Enemies who walk into tar blobs are dealt 15-30, are slowed by 50% for 7 seconds and gain 1 stack of poison (max 8 stacks). Each stack of poison deals 1-3 damage per second. This ball and its tar blobs also deal 6-12 damage to nearby units",
+            "combo": "Base, AOE",
+            "recipes": []
+        },
+        {
+            "name": "Time Bomb",
+            "desc": "Throws a time bomb every few seconds, which explodes after a delay, dealing 80-120 damage to nearby enemies.",
+            "combo": "Base, AOE",
+            "recipes": []
+        },
+        {
+            "name": "Timestop",
+            "desc": "Freezes everything on the field for 5.0 seconds but destroys itself after hitting an enemy. Has a 30 second cooldown before it can be shot again.",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Vampire Lord",
+            "desc": "Each hit inflicts 3 stacks of bleed. Heals 1 health and consumes all stacks when hitting an enemy with at least 10 stacks of bleed",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Venom",
+            "desc": "Applies 1 stack of venom on hit (max 8 stacks). Each stack deal 3-6 damage per second and slows down enemies.",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Virus",
+            "desc": "Applies 1 stack of disease to units it hits (max 8 stacks). Disease lasts for 6 seconds. Each stack of disease deals 3-6 damage per second and diseased units have a 15% chance of passing a stack to undiseased nearby enemies each second",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Voluptuous Egg Sac",
+            "desc": "Explodes into 2-3 egg sacs on hitting an enemy. Has a 3 second cooldown before it can be shot again",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Warp",
+            "desc": "After each hit, warps to a random spot on the field and speeds up by 5%.",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "Wraith",
+            "desc": "Freezes any enemy it passes through for 0.8 seconds",
+            "combo": "Base",
+            "recipes": []
+        },
+        {
+            "name": "X Ray",
+            "desc": "Emits an X-shaped laser on hit, which deals 50-75 damage to enemies and applies 1 stack of radiation (max 5 stacks). Radiation causes enemies to receive 10% more damage from all sources per stack.",
+            "combo": "Base",
+            "recipes": []
+        }
+    ]
+}

@@ -15,92 +15,93 @@ app = Flask(__name__)
 # ---------------------------------------------------------------------------
 
 BASE_BALLS = [
-    {"name": "Bleed", "desc": "Inflicts 2 stacks of bleed. Bleeding enemies receive 1 damage per stack when hit (max 8 stacks)."},
-    {"name": "Brood Mother", "desc": "25% chance of birthing a baby ball each time it hits an enemy."},
-    {"name": "Burn", "desc": "Adds 1 stack of burn on hit for 3 seconds (max 3 stacks). 4-8 damage per stack per second."},
+    {"name": "Bleed", "desc": "Inflicts 2 stacks of bleed. Bleeding enemies receive 1 damage per stack when hit by a ball (max 8 stacks)."},
+    {"name": "Brood Mother", "desc": "Has a 25% chance of birthing a baby ball each time it hits an enemy."},
+    {"name": "Burn", "desc": "Add 1 stack of burn on hit for 3 seconds (max 3 stacks). Burnt units are dealt 4-8 damage per stack per second."},
     {"name": "Cell", "desc": "Splits into a clone on hit 2 times."},
-    {"name": "Charm", "desc": "4% chance to charm enemy for 5 seconds. Charmed units attack enemies."},
-    {"name": "Dark", "desc": "Deals 3x damage but destroys itself after hitting an enemy. 3 second cooldown."},
+    {"name": "Charm", "desc": "Each hit has a 4% chance of charming the enemy for 5 seconds. Charmed units walk up the board and attack enemies."},
+    {"name": "Dark", "desc": "Deals 3.0x damage but destroys itself after hitting an enemy. Has a 3 second cooldown before it can be shot again."},
     {"name": "Earthquake", "desc": "Deals 5-13 damage to nearby units in a 3x3 tile square."},
-    {"name": "Egg Sac", "desc": "Explodes into 2-4 baby balls on hitting an enemy. 3 second cooldown."},
-    {"name": "Freeze", "desc": "4% chance to freeze enemies for 5 seconds. Frozen enemies take 25% more damage."},
+    {"name": "Egg Sac", "desc": "Explodes into 2-4 baby balls on hitting an enemy. Has a 3 second cooldown before it can be shot again."},
+    {"name": "Freeze", "desc": "Has a 4% chance to freeze enemies for 5.0 seconds. Frozen enemies receive 25% more damage."},
     {"name": "Ghost", "desc": "Passes through enemies."},
     {"name": "Iron", "desc": "Deals double damage but moves 40% slower."},
     {"name": "Laser (Horizontal)", "desc": "Deals 9-18 damage to all enemies in the same row."},
     {"name": "Laser (Vertical)", "desc": "Deals 9-18 damage to all enemies in the same column."},
-    {"name": "Light", "desc": "Blinds enemies on hit for 3 seconds. Blinded units have 50% chance of missing attacks."},
+    {"name": "Light", "desc": "Blinds enemies on hit for 3 seconds. Blinded units have a hard time detecting you and have a 50% chance of missing when they attack."},
     {"name": "Lightning", "desc": "Deals 1-20 damage to up to 3 nearby enemies."},
-    {"name": "Poison", "desc": "Applies 1 stack of poison on hit (max 5 stacks). 1-4 damage per stack per second."},
-    {"name": "Vampire", "desc": "4.5% chance of healing 1 health per hit."},
-    {"name": "Wind", "desc": "Passes through enemies, slows by 30% for 5 seconds. Deals 25% less damage."},
-    {"name": "Stone", "desc": "Initially deals 300% damage. Damage erodes by 40% each hit (min 50%). [Post-Launch]"},
-    {"name": "Time", "desc": "Explodes into a time snare on hit. Stays 20 seconds, freezing enemies inside. [Post-Launch]"},
+    {"name": "Stone", "desc": "Initially deals 300% damage. Damage erodes by 40% each time hitting an enemy (minimum 50%)."},
+    {"name": "Poison", "desc": "Applies 1 stack of poison on hit (max 5 stacks). Poison lasts for 6 seconds and each stack deals 1-4 damage per second."},
+    {"name": "Time", "desc": "Explodes into a time snare upon hitting an enemy, which stays on the field for 20 seconds and freezes enemies inside it."},
+    {"name": "Vampire", "desc": "Each hit has a 4.5% chance of healing 1 health."},
+    {"name": "Wind", "desc": "Passes through enemies and slows them down by 30% for 5 seconds, but deals 25% less damage."},
 ]
 
 EVOLVED_BALLS = [
-    {'name': 'Assassin', 'combo': 'Iron + Ghost OR Iron + Dark', 'recipes': [['Iron', 'Ghost'], ['Iron', 'Dark']]},
-    {'name': 'Berserk', 'combo': 'Charm + Bleed OR Charm + Burn', 'recipes': [['Charm', 'Bleed'], ['Charm', 'Burn']]},
-    {'name': 'Black Hole', 'combo': 'Dark + Sun', 'recipes': [['Dark', 'Sun']]},
-    {'name': 'Blizzard', 'combo': 'Freeze + Wind OR Freeze + Lightning', 'recipes': [['Freeze', 'Wind'], ['Freeze', 'Lightning']]},
-    {'name': 'Bomb', 'combo': 'Burn + Iron', 'recipes': [['Burn', 'Iron']]},
-    {'name': 'Flash', 'combo': 'Lightning + Light', 'recipes': [['Lightning', 'Light']]},
-    {'name': 'Flicker', 'combo': 'Light + Dark', 'recipes': [['Light', 'Dark']]},
-    {'name': 'Freeze Ray', 'combo': 'Freeze + Laser (H or V)', 'recipes': [['Freeze', 'Laser (Horizontal)'], ['Freeze', 'Laser (Vertical)']]},
-    {'name': 'Frozen Flame', 'combo': 'Burn + Freeze', 'recipes': [['Burn', 'Freeze']]},
-    {'name': 'Glacier', 'combo': 'Freeze + Earthquake', 'recipes': [['Freeze', 'Earthquake']]},
-    {'name': 'Hemorrhage', 'combo': 'Bleed + Iron', 'recipes': [['Bleed', 'Iron']]},
-    {'name': 'Holy Laser', 'combo': 'Laser (H) + Laser (V)', 'recipes': [['Laser (Horizontal)', 'Laser (Vertical)']]},
-    {'name': 'Incubus', 'combo': 'Charm + Dark', 'recipes': [['Charm', 'Dark']]},
-    {'name': 'Inferno', 'combo': 'Burn + Wind', 'recipes': [['Burn', 'Wind']]},
-    {'name': 'Laser Beam', 'combo': 'Light + Laser (H or V)', 'recipes': [['Light', 'Laser (Horizontal)'], ['Light', 'Laser (Vertical)']]},
-    {'name': 'Leech', 'combo': 'Brood Mother + Bleed', 'recipes': [['Brood Mother', 'Bleed']]},
-    {'name': 'Lightning Rod', 'combo': 'Lightning + Iron', 'recipes': [['Lightning', 'Iron']]},
-    {'name': 'Lovestruck', 'combo': 'Charm + Light OR Charm + Lightning', 'recipes': [['Charm', 'Light'], ['Charm', 'Lightning']]},
-    {'name': 'Maggot', 'combo': 'Brood Mother + Cell', 'recipes': [['Brood Mother', 'Cell']]},
-    {'name': 'Magma', 'combo': 'Burn + Earthquake', 'recipes': [['Burn', 'Earthquake']]},
-    {'name': 'Mosquito King', 'combo': 'Vampire + Brood Mother', 'recipes': [['Vampire', 'Brood Mother']]},
-    {'name': 'Mosquito Swarm', 'combo': 'Vampire + Egg Sac', 'recipes': [['Vampire', 'Egg Sac']]},
-    {'name': 'Noxious', 'combo': 'Poison + Wind OR Dark + Wind', 'recipes': [['Poison', 'Wind'], ['Dark', 'Wind']]},
-    {'name': 'Nuclear Bomb', 'combo': 'Bomb + Poison', 'recipes': [['Bomb', 'Poison']]},
-    {'name': 'Overgrowth', 'combo': 'Earthquake + Cell', 'recipes': [['Earthquake', 'Cell']]},
-    {'name': 'Phantom', 'combo': 'Dark + Ghost', 'recipes': [['Dark', 'Ghost']]},
-    {'name': 'Radiation Beam', 'combo': 'Laser (H or V) + Poison OR Cell', 'recipes': [['Laser (Horizontal)', 'Poison'], ['Laser (Vertical)', 'Poison'], ['Laser (Horizontal)', 'Cell'], ['Laser (Vertical)', 'Cell']]},
-    {'name': 'Sacrifice', 'combo': 'Bleed + Dark', 'recipes': [['Bleed', 'Dark']]},
-    {'name': 'Sandstorm', 'combo': 'Earthquake + Wind', 'recipes': [['Earthquake', 'Wind']]},
-    {'name': 'Satan', 'combo': 'Incubus + Succubus', 'recipes': [['Incubus', 'Succubus']]},
-    {'name': 'Shotgun', 'combo': 'Iron + Egg Sac', 'recipes': [['Iron', 'Egg Sac']]},
-    {'name': 'Soul Sucker', 'combo': 'Vampire + Ghost', 'recipes': [['Vampire', 'Ghost']]},
-    {'name': 'Spider Queen', 'combo': 'Brood Mother + Egg Sac', 'recipes': [['Brood Mother', 'Egg Sac']]},
-    {'name': 'Storm', 'combo': 'Lightning + Wind', 'recipes': [['Lightning', 'Wind']]},
-    {'name': 'Succubus', 'combo': 'Charm + Vampire', 'recipes': [['Charm', 'Vampire']]},
-    {'name': 'Sun', 'combo': 'Burn + Light', 'recipes': [['Burn', 'Light']]},
-    {'name': 'Swamp', 'combo': 'Poison + Earthquake', 'recipes': [['Poison', 'Earthquake']]},
-    {'name': 'Vampire Lord', 'combo': 'Vampire + Bleed OR Vampire + Dark', 'recipes': [['Vampire', 'Bleed'], ['Vampire', 'Dark']]},
-    {'name': 'Virus', 'combo': 'Poison + Ghost OR Poison + Cell', 'recipes': [['Poison', 'Ghost'], ['Poison', 'Cell']]},
-    {'name': 'Voluptuous Egg Sac', 'combo': 'Egg Sac + Cell', 'recipes': [['Egg Sac', 'Cell']]},
-    {'name': 'Wraith', 'combo': 'Freeze + Ghost', 'recipes': [['Freeze', 'Ghost']]},
-    {'name': 'Nosferatu', 'combo': 'Vampire Lord + Spider Queen + Mosquito King', 'recipes': [['Vampire Lord', 'Spider Queen', 'Mosquito King']]},
-    {'name': 'Banished Flame', 'combo': 'Dark + Burn', 'recipes': [['Dark', 'Burn']]},
-    {'name': 'Banshee', 'combo': 'Phantom + Wraith', 'recipes': [['Phantom', 'Wraith']]},
-    {'name': 'Brimstone', 'combo': 'Burn + Stone OR Poison', 'recipes': [['Burn', 'Stone'], ['Burn', 'Poison']]},
-    {'name': 'Catapult', 'combo': 'Stone + Egg Sac', 'recipes': [['Stone', 'Egg Sac']]},
-    {'name': 'Erosion', 'combo': 'Time + Wind', 'recipes': [['Time', 'Wind']]},
-    {'name': 'Fireworks', 'combo': 'Burn + Egg Sac', 'recipes': [['Burn', 'Egg Sac']]},
-    {'name': 'Heart Swallower', 'combo': 'Bleed + Ghost', 'recipes': [['Bleed', 'Ghost']]},
-    {'name': 'Landslide', 'combo': 'Stone + Earthquake', 'recipes': [['Stone', 'Earthquake']]},
-    {'name': 'Laser Cutter', 'combo': 'Steel + Laser (H or V)', 'recipes': [['Steel', 'Laser (Horizontal)'], ['Steel', 'Laser (Vertical)']]},
-    {'name': 'Reaper', 'combo': 'Soul Sucker + Heart Swallower', 'recipes': [['Soul Sucker', 'Heart Swallower']]},
-    {'name': 'Sniper', 'combo': 'Shotgun + Assassin', 'recipes': [['Shotgun', 'Assassin']]},
-    {'name': 'Steel', 'combo': 'Iron + Stone', 'recipes': [['Iron', 'Stone']]},
-    {'name': 'Time Bomb', 'combo': 'Time + Bomb', 'recipes': [['Time', 'Bomb']]},
-    {'name': 'Timestop', 'combo': 'Time + Freeze', 'recipes': [['Time', 'Freeze']]},
-    {'name': 'Venom', 'combo': 'Poison + Freeze', 'recipes': [['Poison', 'Freeze']]},
-    {'name': 'Warp', 'combo': 'Time + Light', 'recipes': [['Time', 'Light']]},
+    {"name": "Assassin", "combo": "Base", "desc": "Passes through the front of enemies, but not the back. Backstabs deal 30% bonus damage.", "recipes": [["Iron", "Ghost"], ["Iron", "Dark"]]},
+    {"name": "Banished Flame", "combo": "Base", "desc": "Add 1 stack of darkflame on hit for 2 seconds (max 6 stacks). Darkflame deals 1-30 damage per stack per second. When the darkflame goes out, it deals 1-100 to the enemy.", "recipes": [["Dark", "Burn"]]},
+    {"name": "Banshee", "combo": "Base", "desc": "Curses all enemies while on the field when launched. Cursed enemies are dealt 150-300 after being hit 6 times.", "recipes": [["Phantom", "Storm"]]},
+    {"name": "Berserk", "combo": "Base", "desc": "Each hit has a 30% chance of causing enemies to go berserk for 6 seconds. Berserk enemies deal 15-24 damage to adjacent enemies every second", "recipes": [["Charm", "Burn"], ["Charm", "Bleed"]]},
+    {"name": "Black Hole", "combo": "Base", "desc": "Instantly kills the first non-boss enemy that it hits, but destroys itself afterwards. Has a 7 second cooldown before it can be shot again", "recipes": [["Dark", "Sun"]]},
+    {"name": "Blizzard", "combo": "Base, AOE", "desc": "Freezes all enemies within a 2 tile radius for 0.8 seconds, dealing 1-50 damage", "recipes": [["Freeze", "Lightning"], ["Freeze", "Wind"]]},
+    {"name": "Bomb", "combo": "AOE", "desc": "Explodes when hitting an enemy, dealing 150-300 damage to nearby enemies. Has a 3 second cooldown before it can be shot again", "recipes": [["Burn", "Iron"]]},
+    {"name": "Brimstone", "combo": "Base", "desc": "Applies 1 stack of burn and poison every second to all enemies within a 2 tile radius (max 4 stacks). Burn deals 1-4 damage per stack per second and poison deals 2-3 damage per stack per second.", "recipes": [["Burn", "Poison"], ["Burn", "Stone"]]},
+    {"name": "Catapult", "combo": "Base", "desc": "Launches 3-5 stone baby balls every 1.5 seconds, which are destroyed after hitting anything.", "recipes": [["Egg Sac", "Stone"]]},
+    {"name": "Erosion", "combo": "Base", "desc": "Passes through enemies. Deals 3% of enemy's current health as bonus damage on hit.", "recipes": [["Time", "Wind"]]},
+    {"name": "Fireworks", "combo": "Base", "desc": "Explodes into 3-6 fireworks. Fireworks target random enemies, dealing 20-30 damage and applying 1 stack of burn. Burnt units are dealt 7-11 damage per stack per second.", "recipes": [["Burn", "Egg Sac"]]},
+    {"name": "Flash", "combo": "Base, AOE", "desc": "Damage all enemies on screen for 1-3 damage after hitting an enemy and blind them for 2 seconds", "recipes": [["Light", "Lightning"]]},
+    {"name": "Flicker", "combo": "Base, AOE", "desc": "Deals 1-7 damage to every enemy on screen every 1.4 seconds", "recipes": [["Light", "Dark"]]},
+    {"name": "Freeze Ray", "combo": "Base, AOE", "desc": "Emits a freeze ray when hitting an enemy, dealing 20-50 to all enemies in its path, with a 10% chance of freezing them for 10.0 seconds", "recipes": [["Freeze", "Laser (Horizontal)"], ["Freeze", "Laser (Vertical)"]]},
+    {"name": "Frozen Flame", "combo": "Base", "desc": "Add 1 stack of frostburn on hit for 20 seconds (max 4 stacks). Frostburnt units are dealt 8-12 damage per stack per second and receive 25% more damage from other sources", "recipes": [["Burn", "Freeze"]]},
+    {"name": "Glacier", "combo": "Base", "desc": "Releases glacial spikes over time that deal 15-30 to enemies that touch them and freeze them for 2.0 seconds. This ball and its glacial spikes also deal 6-12 damage to nearby units", "recipes": [["Freeze", "Earthquake"]]},
+    {"name": "Heart Swallower", "combo": "Base", "desc": "Saps enemies on hit, with a 40% chance of stealing 1 health and reducing their attack damage by 20%. Lifesteal chance only applies once per enemy.", "recipes": [["Bleed", "Ghost"]]},
+    {"name": "Hemorrhage", "combo": "Base", "desc": "Inflicts 3 stacks of bleed. When hitting an enemy with 12 stacks of bleed or more, consumes all stacks of bleed to deal 20% of their current health", "recipes": [["Bleed", "Iron"]]},
+    {"name": "Holy Laser", "combo": "AOE", "desc": "Deals 24-36 damage to all enemies in the same row and column", "recipes": [["Laser (Horizontal)", "Laser (Vertical)"]]},
+    {"name": "Incubus", "combo": "Base", "desc": "Each hit has a 4% chance of charming the enemy for 9 seconds. Charmed enemies curse nearby enemies. Cursed enemies are dealt 100-200 after being hit 5 times", "recipes": [["Charm", "Dark"]]},
+    {"name": "Inferno", "combo": "AOE", "desc": "Applies 1 stack of burn every second to all enemies within a 2 tile radius. Burn lasts for 6 seconds, dealing 3-7 damage per stack per seconds", "recipes": [["Burn", "Wind"]]},
+    {"name": "Landslide", "combo": "Base, AOE", "desc": "Creates a landslide and destroys self upon hitting an enemy. The landslide lasts for 5 seconds and deals 20-30 damage per second to enemies within a 2 tile radius", "recipes": [["Earthquake", "Stone"]]},
+    {"name": "Laser Beam", "combo": "Base, AOE", "desc": "Emit a laser beam on hit that deals 30-42 damage and blinds enemies for 8 seconds", "recipes": [["Laser (Horizontal)", "Light"], ["Laser (Vertical)", "Light"]]},
+    {"name": "Laser Cutter", "combo": "Base, AOE", "desc": "Constantly emits a laser in front of it, which deals 100-150 damage per second.", "recipes": [["Steel", "Laser (Horizontal)"], ["Steel", "Laser (Vertical)"]]},
+    {"name": "Leech", "combo": "Base", "desc": "Attaches up to 1 leech onto enemies it hits, which add 2 stacks of bleed per seconds (max 24 stacks)", "recipes": [["Bleed", "Brood Mother"]]},
+    {"name": "Lightning Rod", "combo": "Base, AOE", "desc": "Plants a lightning rod into enemies it hits. These enemies are struck by lightning every 3.0 seconds, dealing 1-30 damage to up to 8 nearby enemies", "recipes": [["Lightning", "Iron"]]},
+    {"name": "Lovestruck", "combo": "Base", "desc": "Inflicts lovestruck on hit enemies for 20 seconds. Lovestruck units have a 50% chance of healing you for 5 health when they attack", "recipes": [["Charm", "Light"], ["Charm", "Lightning"]]},
+    {"name": "Maggot", "combo": "Base", "desc": "Infest enemies on hit with maggots. When they dies, they explode into 1-2 baby balls", "recipes": [["Brood Mother", "Cell"]]},
+    {"name": "Magma", "combo": "Base, AOE", "desc": "Emits lava blobs over time. Enemies who walk into lava blobs are dealt 15-30 damage and gain 1 stack of burn (max 3 stacks). Burn lasts for 3 seconds, dealing 3-8 damage per stack per second. This ball and its lava blobs also deal 6-12 damage to nearby units", "recipes": [["Burn", "Earthquake"]]},
+    {"name": "Mosquito King", "combo": "Base", "desc": "Spawns a mosquito each time it hits an enemy. Mosquitos attack a random enemy, dealing 80-120 damage each. If a mosquito kills an enemy, they steal 1 health", "recipes": [["Vampire", "Brood Mother"]]},
+    {"name": "Mosquito Swarm", "combo": "Base", "desc": "Explodes into 3-6 mosquitos. Mosquitos attack random enemies, dealing 80-120 damage each. If a mosquito kills an enemy, they steal 1 health", "recipes": [["Vampire", "Egg Sac"]]},
+    {"name": "Nosferatu", "combo": "Base", "desc": "Spawns a vampire bat each bounce. Vampire bats fly towards a random enemy, dealing 132-176 damage on hit, turning into a Vampire Lord", "recipes": [["Vampire Lord", "Spider Queen", "Mosquito King"]]},
+    {"name": "Noxious", "combo": "Base", "desc": "Passes through enemies and applies 3 stacks of poison to nearby enemies within a 2 tile radius. Poison lasts for 4 seconds and each stack deals 1-3 damage per second", "recipes": [["Poison", "Wind"], ["Dark", "Wind"]]},
+    {"name": "Nuclear Bomb", "combo": "AOE", "desc": "Explodes when hitting an enemy, dealing 300-500 damage to nearby enemies and applying 1 stack of radiation to everyone present indefinitely (max 5 stacks). Each stack of radiation increases damage received by 10%. Has a 3 second cooldown", "recipes": [["Bomb", "Poison"]]},
+    {"name": "Overgrowth", "combo": "Base, AOE", "desc": "Applies 1 stack of overgrowth. Upon reaching 3, consume all stacks and deal 150-200 damage to all enemies in a 3x3 tile square", "recipes": [["Cell", "Earthquake"]]},
+    {"name": "Phantom", "combo": "Base", "desc": "Curse enemies on hit. Cursed enemies are dealt 100-200 damage after being hit 5 times", "recipes": [["Dark", "Ghost"]]},
+    {"name": "Radiation Beam", "combo": "Base, AOE", "desc": "Emit a radiation beam on hit that deals 24-48 damage and applies 1 stack of radiation (max 5 stacks). Radiation lasts for 15 seconds and cause enemies to receive 10% more damage from all sources per stack", "recipes": [["Cell", "Laser (Horizontal)"], ["Cell", "Laser (Vertical)"], ["Poison", "Laser (Horizontal)"], ["Poison", "Laser (Vertical)"]]},
+    {"name": "Reaper", "combo": "Base", "desc": "Has a 10% chance to kill enemies on impact, healing you for 5 health.", "recipes": [["Soul Sucker", "Heart Swallower"]]},
+    {"name": "Sacrifice", "combo": "Base", "desc": "Inflicts 4 stacks of bleed (max 15 stacks) and applies curse to hit enemies. Cursed enemies are dealt 50-100 after being hit 5 times", "recipes": [["Bleed", "Dark"]]},
+    {"name": "Sandstorm", "combo": "Base, AOE", "desc": "Goes through enemies and is surrounded by a raging storm dealing 10-20 damage per second and blinding nearby enemies for 3 seconds", "recipes": [["Earthquake", "Wind"]]},
+    {"name": "Satan", "combo": "Base", "desc": "While active, add 1 stack of burn to all active enemies per second (max 5 stacks), dealing 10-20 damage per stack per second and make them go berserk, dealing 15-24 damage to adjacent enemies every second", "recipes": [["Incubus", "Succubus"]]},
+    {"name": "Shotgun", "combo": "Base", "desc": "Shoots 3-7 iron baby balls after hitting a wall. Iron baby balls move at 200% speed but are destroyed upon hitting anything", "recipes": [["Iron", "Egg Sac"]]},
+    {"name": "Sniper", "combo": "Base", "desc": "Pierces enemies and shoots 3-7 sniper baby balls after hitting a wall. Sniper baby balls pierce enemies but are destroyed upon hitting a wall.", "recipes": [["Shotgun", "Assassin"]]},
+    {"name": "Soul Sucker", "combo": "Base", "desc": "Passes through enemies and saps them, with a 30% chance of stealing 1 health and reducing their attack damage by 20%. Lifesteal chance only applies once per enemy", "recipes": [["Vampire", "Ghost"]]},
+    {"name": "Spider Queen", "combo": "Base", "desc": "Has a 25% chance of birthing an Egg Sac each time it hits an enemy", "recipes": [["Brood Mother", "Egg Sac"]]},
+    {"name": "Steel", "combo": "Base", "desc": "Initially deals double damage but moves 50% slower. Damage increases by 10% each time it hits an enemy (max 300%).", "recipes": [["Stone", "Iron"]]},
+    {"name": "Storm", "combo": "AOE", "desc": "Emits lightning to strike nearby enemies every second, dealing 1-40 damage", "recipes": [["Lightning", "Wind"]]},
+    {"name": "Succubus", "combo": "Base", "desc": "Each hit has a 4% chance of charming the enemy for 9 seconds. Heals 1 when hitting a charmed enemy", "recipes": [["Charm", "Vampire"]]},
+    {"name": "Sun", "combo": "Base", "desc": "Blind all enemies in view and add 1 stack of burn every second (max 5 stacks). Burn lasts for 6 seconds and deals 6-12 damage per stack per second", "recipes": [["Burn", "Light"]]},
+    {"name": "Swamp", "combo": "Base, AOE", "desc": "Leaves behind tar blobs over time. Enemies who walk into tar blobs are dealt 15-30, are slowed by 50% for 7 seconds and gain 1 stack of poison (max 8 stacks). Each stack of poison deals 1-3 damage per second. This ball and its tar blobs also deal 6-12 damage to nearby units", "recipes": [["Poison", "Earthquake"]]},
+    {"name": "Time Bomb", "combo": "Base, AOE", "desc": "Throws a time bomb every few seconds, which explodes after a delay, dealing 80-120 damage to nearby enemies.", "recipes": [["Time", "Bomb"]]},
+    {"name": "Timestop", "combo": "Base", "desc": "Freezes everything on the field for 5.0 seconds but destroys itself after hitting an enemy. Has a 30 second cooldown before it can be shot again.", "recipes": [["Time", "Freeze"]]},
+    {"name": "Vampire Lord", "combo": "Base", "desc": "Each hit inflicts 3 stacks of bleed. Heals 1 health and consumes all stacks when hitting an enemy with at least 10 stacks of bleed", "recipes": [["Vampire", "Bleed"], ["Vampire", "Dark"]]},
+    {"name": "Venom", "combo": "Base", "desc": "Applies 1 stack of venom on hit (max 8 stacks). Each stack deal 3-6 damage per second and slows down enemies.", "recipes": [["Poison", "Freeze"]]},
+    {"name": "Virus", "combo": "Base", "desc": "Applies 1 stack of disease to units it hits (max 8 stacks). Disease lasts for 6 seconds. Each stack of disease deals 3-6 damage per second and diseased units have a 15% chance of passing a stack to undiseased nearby enemies each second", "recipes": [["Poison", "Ghost"], ["Poison", "Cell"]]},
+    {"name": "Voluptuous Egg Sac", "combo": "Base", "desc": "Explodes into 2-3 egg sacs on hitting an enemy. Has a 3 second cooldown before it can be shot again", "recipes": [["Egg Sac", "Cell"]]},
+    {"name": "Warp", "combo": "Base", "desc": "After each hit, warps to a random spot on the field and speeds up by 5%.", "recipes": [["Time", "Light"]]},
+    {"name": "Wraith", "combo": "Base", "desc": "Freezes any enemy it passes through for 0.8 seconds", "recipes": [["Freeze", "Ghost"]]},
+    {"name": "X Ray", "combo": "Base", "desc": "Emits an X-shaped laser on hit, which deals 50-75 damage to enemies and applies 1 stack of radiation (max 5 stacks). Radiation causes enemies to receive 10% more damage from all sources per stack.", "recipes": [["Holy Laser", "Laser Beam"]]},
 ]
 
 TOP_EVOLUTIONS = [
     "Frozen Flame", "Nuclear Bomb", "Hemorrhage", "Vampire Lord", "Holy Laser",
-    "Satan", "Nosferatu", "Black Hole", "Radiation Beam", "Sun", "Timestop", "Laser Cutter", "Banished Flame", "Reaper",
+    "Satan", "Nosferatu", "Black Hole", "Radiation Beam", "Sun", "Laser Cutter", "Banished Flame", "Reaper",
 ]
 
 TOP_FUSIONS = [
@@ -149,6 +150,33 @@ def get_recipes(ball_name):
             return eb.get('recipes', [])
     return []
 
+def get_base_combo_string(ball_name):
+    ball = find_ball(ball_name)
+    if not ball:
+        return ball_name.lower()
+        
+    if ball in BASE_BALLS:
+        return ball_name.lower()
+        
+    recipes = get_recipes(ball_name)
+    if not recipes:
+        return ball_name.lower()
+        
+    recipe = recipes[0]
+    
+    all_base = True
+    for c in recipe:
+        c_ball = find_ball(c)
+        if c_ball not in BASE_BALLS:
+            all_base = False
+            break
+            
+    if all_base:
+        return "+".join(c.lower() for c in recipe)
+    else:
+        parts = [get_base_combo_string(c) for c in recipe]
+        return ",".join(parts)
+
 def min_distance(target, current_counts):
     # current_counts is a Counter
     if current_counts.get(target, 0) > 0:
@@ -190,8 +218,31 @@ def fusion_distance(fusion_recipe, current_counts):
 def evaluate_options(current_balls, level_up_options):
     current_counts = Counter(current_balls)
     
-    base_evo_dists = {evo: min_distance(evo, current_counts)[0] for evo in TOP_EVOLUTIONS}
+    # Pre-calculate distances for ALL evolutions, not just TOP_EVOLUTIONS
+    base_evo_dists = {evo['name']: min_distance(evo['name'], current_counts)[0] for evo in EVOLVED_BALLS}
     base_fusion_dists = {idx: fusion_distance(fusion["balls"], current_counts) for idx, fusion in enumerate(TOP_FUSIONS)}
+    
+    if not level_up_options:
+        # Give advice based ONLY on current balls
+        close_evos = [(evo_name, dist) for evo_name, dist in base_evo_dists.items() if dist == 1]
+        close_evos.sort(key=lambda x: (0 if x[0] in TOP_EVOLUTIONS else 1, x[0]))
+        
+        almost_evos = [{"name": name, "is_top": name in TOP_EVOLUTIONS} for name, dist in close_evos[:8]]
+        
+        close_fusions = [(idx, dist) for idx, dist in base_fusion_dists.items() if dist == 1]
+        almost_fusions = [{"name": f"{TOP_FUSIONS[idx]['balls'][0]} × {TOP_FUSIONS[idx]['balls'][1]}"} for idx, dist in close_fusions[:4]]
+        
+        advice = "No specific targets are 1 piece away right now. Pick strong base balls to start new combos."
+        
+        return {
+            "best_pick": "Analysis Only",
+            "text_advice": advice,
+            "analysis": {
+                "almost_evos": almost_evos,
+                "almost_fusions": almost_fusions
+            },
+            "raw_results": {}
+        }
     
     best_score = -1
     best_option = None
@@ -205,16 +256,21 @@ def evaluate_options(current_balls, level_up_options):
         synergies = []
         improvements = []
         
-        for evo in TOP_EVOLUTIONS:
-            new_dist = min_distance(evo, new_counts)[0]
-            old_dist = base_evo_dists[evo]
+        # Check against ALL evolved balls
+        for evo in EVOLVED_BALLS:
+            evo_name = evo['name']
+            new_dist = min_distance(evo_name, new_counts)[0]
+            old_dist = base_evo_dists[evo_name]
+            
             if new_dist < old_dist:
+                is_top = evo_name in TOP_EVOLUTIONS
                 if new_dist == 0:
-                    synergies.append(f"Evolution: {evo}")
-                    score += 1000
+                    prefix = "⭐ Top Evolution" if is_top else "Evolution"
+                    synergies.append(f"{prefix}: {evo_name}")
+                    score += 1000 if is_top else 400
                 else:
-                    improvements.append((new_dist, f"Closer to {evo} ({new_dist} away)"))
-                    score += 10 / new_dist
+                    improvements.append((new_dist, f"Closer to {evo_name} ({new_dist} away)", is_top))
+                    score += (20 if is_top else 5) / new_dist
                     
         for idx, fusion in enumerate(TOP_FUSIONS):
             new_dist = fusion_distance(fusion["balls"], new_counts)
@@ -222,14 +278,14 @@ def evaluate_options(current_balls, level_up_options):
             if new_dist < old_dist:
                 fusion_name = f"{fusion['balls'][0]} × {fusion['balls'][1]}"
                 if new_dist == 0:
-                    synergies.append(f"Fusion: {fusion_name}")
+                    synergies.append(f"⭐ Fusion: {fusion_name}")
                     score += 2000
                 else:
-                    improvements.append((new_dist, f"Closer to {fusion_name} ({new_dist} away)"))
-                    score += 20 / new_dist
+                    improvements.append((new_dist, f"Closer to {fusion_name} ({new_dist} away)", True))
+                    score += 40 / new_dist
                     
-        # Sort improvements by distance
-        improvements.sort(key=lambda x: x[0])
+        # Sort improvements by distance, then whether they are top
+        improvements.sort(key=lambda x: (x[0], not x[2]))
         imp_strings = [x[1] for x in improvements]
         
         results[option] = {
@@ -281,11 +337,40 @@ def index():
 
 @app.route("/api/balls")
 def api_balls():
+    fuses_into_map = {}
+    for eb in EVOLVED_BALLS:
+        for recipe in eb.get("recipes", []):
+            for comp in recipe:
+                comp_lower = comp.lower()
+                if comp_lower not in fuses_into_map:
+                    fuses_into_map[comp_lower] = set()
+                fuses_into_map[comp_lower].add(eb["name"])
+
+    base_with_info = []
+    for b in BASE_BALLS:
+        b_copy = dict(b)
+        b_copy['fuses_into'] = sorted(list(fuses_into_map.get(b['name'].lower(), set())))
+        base_with_info.append(b_copy)
+
+    evolved_with_combo = []
+    for b in EVOLVED_BALLS:
+        b_copy = dict(b)
+        b_copy['base_combo'] = get_base_combo_string(b['name'])
+        b_copy['fuses_into'] = sorted(list(fuses_into_map.get(b['name'].lower(), set())))
+        evolved_with_combo.append(b_copy)
+        
+    fusions_with_combo = []
+    for f in TOP_FUSIONS:
+        f_copy = dict(f)
+        parts = [get_base_combo_string(c) for c in f['balls']]
+        f_copy['base_combo'] = ",".join(parts)
+        fusions_with_combo.append(f_copy)
+
     return jsonify({
-        "base": BASE_BALLS,
-        "evolved": EVOLVED_BALLS,
+        "base": base_with_info,
+        "evolved": evolved_with_combo,
         "top_evolutions": TOP_EVOLUTIONS,
-        "top_fusions": TOP_FUSIONS,
+        "top_fusions": fusions_with_combo,
     })
 
 

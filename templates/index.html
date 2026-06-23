@@ -77,6 +77,63 @@
       100% { transform: translate(80px, 60px) scale(1.15); }
     }
 
+    
+    /* ------------------------------------------------------------------ */
+    /* View Navigation                                                    */
+    /* ------------------------------------------------------------------ */
+    .view-tabs {
+      display: flex; gap: 8px; justify-content: center; margin-bottom: 24px;
+      animation: fadeUp .6s ease-out;
+    }
+    .view-tab {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 24px;
+      color: var(--text-dim);
+      font-size: 14px; font-weight: 600; font-family: var(--font);
+      cursor: pointer; transition: all .2s;
+    }
+    .view-tab:hover { color: var(--text); background: rgba(255,255,255,0.08); }
+    .view-tab.active {
+      background: var(--gold-dim); border-color: var(--border-accent); color: var(--gold);
+    }
+    
+    .view-container { display: none; }
+    .view-container.active { display: block; animation: fadeUp .4s ease-out; }
+
+    .search-row {
+      margin-bottom: 16px;
+    }
+    .search-row input {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      color: var(--text);
+      font-size: 14px;
+      font-family: var(--font);
+      outline: none;
+      transition: border-color .2s;
+    }
+    .search-row input:focus { border-color: var(--border-accent); }
+
+    .ref-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 13px;
+    }
+    .ref-table th, .ref-table td {
+      text-align: left; padding: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .ref-table th { color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.1em; }
+    .ref-table td { color: #c8d6e8; }
+    .ref-table tr:hover { background: rgba(255,255,255,0.02); }
+    .ball-name-cell { color: var(--gold); font-weight: 600; }
+
     /* ------------------------------------------------------------------ */
     /* Layout                                                             */
     /* ------------------------------------------------------------------ */
@@ -185,6 +242,20 @@
     }
     .btn-add:hover { background: rgba(255,200,50,0.18); transform: translateY(-1px); }
     .btn-add:active { transform: translateY(0); }
+
+    .btn-clear {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 4px 10px;
+      color: var(--text-dim);
+      font-size: 11px; font-weight: 600;
+      font-family: var(--font);
+      cursor: pointer;
+      transition: color .2s, border-color .2s;
+      white-space: nowrap;
+    }
+    .btn-clear:hover { color: var(--danger); border-color: rgba(255,80,80,0.3); }
 
     /* ------------------------------------------------------------------ */
     /* Ball Tags                                                          */
@@ -543,63 +614,92 @@
 
     
 
-    <!-- Input Panel -->
-    <div class="panel panel--delay1">
-      <!-- Current Balls -->
-      <div class="section-label">
-        <span class="section-label__icon">🎱</span>
-        <span class="section-label__text">Your Current Balls</span>
-      </div>
-      <div class="input-row">
-        <input type="text" id="current-input" list="ball-datalist"
-               placeholder="Type a ball name and press Enter…"
-               onkeydown="if(event.key==='Enter'){addBall('current')}" />
-        <button class="btn-add" onclick="addBall('current')">+ Add</button>
-      </div>
-      <div class="tags" id="current-tags">
-        <span class="tags__empty">None added yet</span>
-      </div>
-
-      <div class="divider"></div>
-
-      <!-- Level-Up Options -->
-      <div class="section-label">
-        <span class="section-label__icon">🎯</span>
-        <span class="section-label__text">Level-Up Options Offered</span>
-      </div>
-      <div class="input-row">
-        <input type="text" id="levelup-input" list="ball-datalist"
-               placeholder="What balls are being offered?"
-               onkeydown="if(event.key==='Enter'){addBall('levelup')}" />
-        <button class="btn-add" onclick="addBall('levelup')">+ Add</button>
-      </div>
-      <div class="tags" id="levelup-tags">
-        <span class="tags__empty">None added yet</span>
-      </div>
+    <!-- View Navigation -->
+    <div class="view-tabs">
+      <button class="view-tab active" onclick="switchView('analyser', this)">Ball Analyser</button>
+      <button class="view-tab" onclick="switchView('reference', this)">Ball Reference</button>
     </div>
 
-    <!-- Error -->
-    <div id="error-container"></div>
+    <!-- VIEW: Analyser -->
+    <div id="view-analyser" class="view-container active">
+      <!-- Input Panel -->
+      <div class="panel panel--delay1">
+        <!-- Current Balls -->
+        <div class="section-label">
+          <span class="section-label__icon">🎱</span>
+          <span class="section-label__text">Your Current Balls</span>
+          <button class="btn-clear" style="margin-left: auto;" onclick="clearBalls('current')">Clear All</button>
+        </div>
+        <div class="input-row">
+          <input type="text" id="current-input" list="ball-datalist"
+                 placeholder="Type a ball name and press Enter…"
+                 onkeydown="if(event.key==='Enter'){addBall('current')}" />
+          <button class="btn-add" onclick="addBall('current')">+ Add</button>
+        </div>
+        <div class="tags" id="current-tags">
+          <span class="tags__empty">None added yet</span>
+        </div>
 
-    <!-- CTA -->
-    <button class="cta" id="cta-btn" onclick="getAdvice()">
-      ⚡&nbsp; Get Build Advice
-    </button>
+        <div class="divider"></div>
 
-    <!-- Advice Output -->
-    <div id="advice-container"></div>
-
-    <!-- Ball Reference -->
-    <details class="reference" id="reference-details">
-      <summary id="ref-summary">📖 Ball reference (<span id="ball-count">0</span> balls)</summary>
-      <div class="ref-tabs">
-        <button class="ref-tab active" data-filter="top" onclick="filterRef('top', this)">⭐ Top Picks</button>
-        <button class="ref-tab" data-filter="all" onclick="filterRef('all', this)">All</button>
-        <button class="ref-tab" data-filter="base" onclick="filterRef('base', this)">Base</button>
-        <button class="ref-tab" data-filter="evolved" onclick="filterRef('evolved', this)">Evolved</button>
+        <!-- Level-Up Options -->
+        <div class="section-label">
+          <span class="section-label__icon">🎯</span>
+          <span class="section-label__text">Level-Up Options Offered</span>
+          <button class="btn-clear" style="margin-left: auto;" onclick="clearBalls('levelup')">Clear All</button>
+        </div>
+        <div class="input-row">
+          <input type="text" id="levelup-input" list="ball-datalist"
+                 placeholder="What balls are being offered?"
+                 onkeydown="if(event.key==='Enter'){addBall('levelup')}" />
+          <button class="btn-add" onclick="addBall('levelup')">+ Add</button>
+        </div>
+        <div class="tags" id="levelup-tags">
+          <span class="tags__empty">None added yet</span>
+        </div>
       </div>
-      <div class="ref-grid" id="ref-grid"></div>
-    </details>
+
+      <div id="error-container"></div>
+
+      <!-- Top Fusions Button -->
+      <div style="text-align: right; margin-bottom: 16px;">
+        <button class="btn-clear" onclick="toggleTopFusions()" style="font-size: 13px; padding: 8px 16px; border-color: rgba(192, 132, 252, 0.4); color: #c084fc;">🔮 View Top Fusions</button>
+      </div>
+      <div id="top-fusions-container" style="display: none; margin-bottom: 24px;"></div>
+
+      <button class="cta" id="cta-btn" onclick="getAdvice()">
+        ⚡&nbsp; Get Build Advice
+      </button>
+
+      <div id="advice-container"></div>
+    </div>
+
+    <!-- VIEW: Reference -->
+    <div id="view-reference" class="view-container">
+      <div class="panel">
+        <div class="search-row">
+          <input type="text" id="ref-search" placeholder="Search balls by name..." oninput="renderReferenceTable()" />
+        </div>
+        <div class="ref-tabs" style="margin-bottom: 16px;">
+          <button class="ref-tab active" data-ref="top_evo" onclick="switchRefTab('top_evo', this)">⭐ Top Evolutions</button>
+          <button class="ref-tab" data-ref="all" onclick="switchRefTab('all', this)">All Balls</button>
+        </div>
+        <div style="overflow-x: auto;">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Requires</th>
+                <th>Description</th>
+                <th>Fuses Into</th>
+              </tr>
+            </thead>
+            <tbody id="ref-tbody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
 
     <!-- Datalist for autocomplete -->
     <datalist id="ball-datalist"></datalist>
@@ -641,17 +741,8 @@ let loading      = false;
       dl.appendChild(opt);
     });
 
-    document.getElementById('ball-count').textContent = allBalls.length;
-    renderReference('top');
-
-    // Restore API key
-    const savedKey = localStorage.getItem('bxp_api_key');
-    if (savedKey) document.getElementById('api-key-input').value = savedKey;
-
-    // Save key on change
-    document.getElementById('api-key-input').addEventListener('input', (e) => {
-      localStorage.setItem('bxp_api_key', e.target.value);
-    });
+    // Data loaded successfully
+    // Ref rendered on tab switch
   } catch (e) {
     showError('Failed to load ball data.');
   }
@@ -695,6 +786,15 @@ function removeBall(section, name) {
   const list = section === 'current' ? currentBalls : levelUpBalls;
   const idx  = list.indexOf(name);
   if (idx !== -1) list.splice(idx, 1);
+  renderTags(section);
+}
+
+function clearBalls(section) {
+  if (section === 'current') {
+    currentBalls = [];
+  } else {
+    levelUpBalls = [];
+  }
   renderTags(section);
 }
 
@@ -773,6 +873,42 @@ function renderAdvice(structured) {
     return;
   }
 
+  if (structured.best_pick === "Analysis Only") {
+    let html = `
+      <div class="advice-card">
+        <div class="advice-card__label">💡 Current Build Analysis</div>
+    `;
+    
+    if (structured.analysis && structured.analysis.almost_evos && structured.analysis.almost_evos.length > 0) {
+      html += `<div>
+        <strong style="color: var(--cyan); font-size: 13px; text-transform: uppercase; letter-spacing: .1em;">📈 Evolutions to Target (1 away)</strong>
+        <ul style="margin-top: 6px; margin-bottom: 16px; padding-left: 20px; color: #c8d6e8; font-size: 14px;">`;
+      structured.analysis.almost_evos.forEach(evo => {
+        let prefix = evo.is_top ? '⭐ ' : '';
+        html += `<li style="margin-bottom: 4px;">${prefix}<b>${escapeHtml(evo.name)}</b></li>`;
+      });
+      html += `</ul></div>`;
+    }
+
+    if (structured.analysis && structured.analysis.almost_fusions && structured.analysis.almost_fusions.length > 0) {
+      html += `<div>
+        <strong style="color: #c084fc; font-size: 13px; text-transform: uppercase; letter-spacing: .1em;">🔥 Fusions to Target (1 away)</strong>
+        <ul style="margin-top: 6px; padding-left: 20px; color: #c8d6e8; font-size: 14px;">`;
+      structured.analysis.almost_fusions.forEach(fusion => {
+        html += `<li style="margin-bottom: 4px;">⭐ <b>${escapeHtml(fusion.name)}</b></li>`;
+      });
+      html += `</ul></div>`;
+    }
+    
+    if ((!structured.analysis.almost_evos || structured.analysis.almost_evos.length === 0) && (!structured.analysis.almost_fusions || structured.analysis.almost_fusions.length === 0)) {
+       html += `<div class="advice-card__body">${escapeHtml(structured.text_advice)}</div>`;
+    }
+    
+    html += `</div>`;
+    document.getElementById('advice-container').innerHTML = html;
+    return;
+  }
+
   let raw = structured.raw_results[structured.best_pick] || {synergies:[], improvements:[]};
   
   let html = `
@@ -820,63 +956,109 @@ function renderAdvice(structured) {
 // ========================================================================
 // Reference Panel
 // ========================================================================
-function renderReference(filter) {
-  const grid = document.getElementById('ref-grid');
 
-  if (filter === 'top') {
-    // Render top evolutions + top fusions together
-    let html = '';
+let currentRefTab = 'top_evo';
+let currentSearch = '';
 
-    // Top Evolutions
-    html += '<div class="top-picks-section">';
-    html += '<div class="top-picks-heading top-picks-heading--evo">🏆 Top Evolutions</div>';
-    html += '<div class="evo-badges">';
-    topEvolutions.forEach(name => {
-      const ball = allBalls.find(b => b.name === name);
-      html += `<span class="evo-badge" title="${ball ? escapeHtml(ball.desc) : ''}">${escapeHtml(name)}</span>`;
-    });
-    html += '</div></div>';
+function switchView(viewId, btn) {
+  document.querySelectorAll('.view-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.view-container').forEach(c => c.classList.remove('active'));
+  document.getElementById('view-' + viewId).classList.add('active');
+  if (viewId === 'reference') {
+    renderReferenceTable();
+  }
+}
 
-    // Top Fusions
-    html += '<div class="top-picks-section">';
-    html += '<div class="top-picks-heading top-picks-heading--fusion">🔮 Top Fusions</div>';
-    html += '<div style="display:flex;flex-direction:column;gap:6px;">';
+function switchRefTab(tabId, btn) {
+  document.querySelectorAll('.ref-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentRefTab = tabId;
+  renderReferenceTable();
+}
+
+function renderReferenceTable() {
+  currentSearch = document.getElementById('ref-search').value.toLowerCase();
+  let list = [];
+  
+  if (currentRefTab === 'top_evo') {
+    list = topEvolutions.map(name => allBalls.find(b => b.name === name)).filter(Boolean);
+  } else {
+    list = allBalls;
+  }
+
+  if (currentSearch) {
+    list = list.filter(b => b.name.toLowerCase().includes(currentSearch));
+  }
+
+  const tbody = document.getElementById('ref-tbody');
+  if (list.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-dim); padding: 32px;">No balls match your search.</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = list.map(b => {
+    // Build the Requires column from recipe data
+    let requires = '';
+    const isBase = baseBalls.some(bb => bb.name === b.name);
+    if (isBase) {
+      requires = `<span style="color: var(--text-dim); font-style: italic;">Base Ball</span>`;
+    } else if (b.recipes && b.recipes.length > 0) {
+      requires = b.recipes.map((recipe, i) => {
+        const parts = recipe.map(r => `<span style="color: var(--gold);">${escapeHtml(r)}</span>`);
+        return parts.join(' <span style="color: var(--text-dim);">+</span> ');
+      }).join('<div style="color: var(--text-dim); font-size: 10px; margin: 3px 0;">— OR —</div>');
+      // Show base-level steps for multi-stage evolutions
+      if (b.base_combo && b.base_combo.includes(',')) {
+        requires += `<div style="color: var(--text-dim); font-size: 11px; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 4px;">🔗 ${escapeHtml(b.base_combo.replace(/,/g, ' → '))}</div>`;
+      }
+    } else {
+      requires = `<span style="color: var(--text-dim);">—</span>`;
+    }
+
+    let fusesInto = '';
+    if (b.fuses_into && b.fuses_into.length > 0) {
+      fusesInto = b.fuses_into.map(f => `<span style="display: inline-block; background: rgba(90,232,232,0.08); border: 1px solid rgba(90,232,232,0.15); border-radius: 4px; padding: 2px 8px; margin: 2px 3px 2px 0; font-size: 11px; color: var(--cyan);">${escapeHtml(f)}</span>`).join('');
+    } else {
+      fusesInto = `<span style="color: var(--text-dim);">—</span>`;
+    }
+    
+    const isTop = topEvolutions.includes(b.name);
+    const namePrefix = isTop ? '⭐ ' : '';
+    
+    return `
+      <tr>
+        <td class="ball-name-cell">${namePrefix}${escapeHtml(b.name)}</td>
+        <td style="min-width: 160px;">${requires}</td>
+        <td style="max-width: 300px; line-height: 1.4;">${escapeHtml(b.desc)}</td>
+        <td>${fusesInto}</td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function toggleTopFusions() {
+  const container = document.getElementById('top-fusions-container');
+  if (container.style.display === 'none') {
+    container.style.display = 'block';
+    
+    let fHtml = '<div class="panel" style="border-color: rgba(192, 132, 252, 0.2);"><div class="top-picks-heading top-picks-heading--fusion" style="margin-bottom: 12px;">🔮 Top Fusions</div><div style="display:flex;flex-direction:column;gap:6px;">';
     topFusions.forEach(f => {
-      html += `
+      fHtml += `
         <div class="fusion-card">
           <div class="fusion-card__names">
             <span class="fusion-card__ball">${escapeHtml(f.balls[0])}</span>
             <span class="fusion-card__x">×</span>
             <span class="fusion-card__ball">${escapeHtml(f.balls[1])}</span>
           </div>
-          <div class="fusion-card__tip">${escapeHtml(f.tip)}</div>
+          ${f.base_combo ? `<div class="fusion-card__tip" style="color: var(--text-dim); margin-top: 4px;">Steps: ${escapeHtml(f.base_combo)}</div>` : ''}
         </div>
       `;
     });
-    html += '</div></div>';
-
-    grid.innerHTML = html;
-    return;
+    fHtml += '</div></div>';
+    container.innerHTML = fHtml;
+  } else {
+    container.style.display = 'none';
   }
-
-  let balls;
-  if (filter === 'base')         balls = baseBalls;
-  else if (filter === 'evolved') balls = evolvedBalls;
-  else                           balls = allBalls;
-
-  grid.innerHTML = balls.map(b => `
-    <div class="ref-card">
-      <span class="ref-card__name">${escapeHtml(b.name)}</span>
-      ${b.combo ? `<span class="ref-card__combo">← ${escapeHtml(b.combo)}</span>` : ''}
-      <div class="ref-card__desc">${escapeHtml(b.desc)}</div>
-    </div>
-  `).join('');
-}
-
-function filterRef(filter, el) {
-  document.querySelectorAll('.ref-tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  renderReference(filter);
 }
 
 // ========================================================================
